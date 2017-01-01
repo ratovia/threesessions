@@ -23,7 +23,7 @@ development:
   <<: *default
   username: dev_user
   password: password
-  database: threesession_development
+  database: threesessions_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -32,11 +32,11 @@ test:
   <<: *default
   username: test_user
   password: password
-  database: threesession_test
+  database: threesessions_test
 
 production:
   <<: *default
   username: pro_user
   password: password
-  database: threesession_production
+  database: threesessions_production
 
