@@ -1,7 +1,32 @@
-<h2><%= @user.name %></h2>
-<ul id="room-list">
-  <li>
-    room1 | <label class="join"> join </label> | <lavel class='delete'> delete </lavel>
-  </li>
-</ul>
-<div class="create">create</div>
+<% if @room %>
+    <% @room.each do |t| %>
+        <%= t.name %>
+        <form action="/rooms/join" method="post">
+          <button type="submit" name="action" value="join">入室</button>
+          <input type="hidden" name="users_id" value="<%= @user_id %>">
+          <input type="hidden" name="room_id" value="<%= t.id %>">
+        </form>
+        <form action="/rooms/delete" method="post">
+          <button type="submit" name="action" value="delete">削除</button>
+          <input type="hidden" name="user_id" value="<%= @user_id %>">
+          <input type="hidden" name="room_id" value="<%= t.id %>">
+        </form>
+        <br>
+    <% end %>
+<% else %>
+    <div>nothing room</div>
+<% end %>
+<form action="/rooms/create"  method="post">
+  <label>
+    create room
+    <input type="text" name="roomname">
+    <input type="hidden" name="users_id" value="<%= @user_id %>">
+  </label>
+</form>
+<form action="/rooms/join"  method="post">
+  <label>
+    join other room
+    <input type="text" name="room_id">
+    <input type="hidden" name="users_id" value="<%= @user_id %>">
+  </label>
+</form>

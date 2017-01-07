@@ -5,12 +5,19 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(:name => params[:username])
-    @user.save
-    render action: :show
+    @user = User.find_by(:name => params[:username])
+    if @user
+      redirect_to "/users/show/#{@user.id}"
+    else
+      @user = User.new(:name => params[:username])
+      if @user.save
+        redirect_to "/users/show/#{@user.id}"
+      end
+    end
   end
 
   def show
-
+    @user_id = params[:id]
+    @room = Room.includes(:users).where('users.id' => @user_id)
   end
 end

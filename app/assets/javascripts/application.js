@@ -14,10 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require three.min.js
-//= require OrbitControls.js
-//= require Projector.js
+//= require three.js
 //= require TransformControls.js
-//= require Threesessions
-//= require client
-//= require select
-//= require view
+//= require Projector.js
+//= require OrbitControls.js
+

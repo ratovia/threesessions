@@ -16,4 +16,10 @@ class RoomTest < ActiveSupport::TestCase
     @room.name = "     "
     assert_not @room.valid?
   end
+
+  test "関連性" do
+    @user = User.new(name: "Example User")
+    @room.users << @user
+    assert_includes @room.users , @user
+  end
 end
