@@ -1,4 +1,4 @@
-<div data-user-id="<%= @user_id %>" data-room-id="<%= @room_id %>"></div>
+<div data-room="<%= @room.id%>" data-user="<%= @user.id %>"></div>
 <%= javascript_include_tag 'sync', 'data-turbolinks-track': 'reload' %>
 <%= javascript_include_tag 'patch', 'data-turbolinks-track': 'reload' %>
 <%= javascript_include_tag 'diff', 'data-turbolinks-track': 'reload' %>
