@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
   def join
     @room = Room.find(params[:room_id])
     @user = User.find(params[:users_id])
-    shadow(@room, @user)
+    makeshadow(@room, @user)
     redirect_to "/rooms/home/#{@room.id}/#{@user.id}"
   end
 
@@ -36,11 +36,12 @@ class RoomsController < ApplicationController
     edit = JSON.parse(params[:edit])
     patch(edit,@user.id)
     # diff
-    data = diff(@user)
+    data = diff(@room,@user)
     # data = []
     # copy
     shadow(@room, @user)
     # render
+    p data
     render json: data
   end
 
@@ -92,7 +93,7 @@ class RoomsController < ApplicationController
       @vertex3.save
     end
 
-    def diff(user)
+    def diff(room,user)
       # serverTextとserverShadowのデータの差分
       edit = []
       @servertext = {
@@ -106,8 +107,8 @@ class RoomsController < ApplicationController
         :faces_id => [],
         :vertices_id => []
       }
-      systemscene = Scene.find_by(:aff => 0)
-      userscene = Scene.find_by(:aff => user.id)
+      systemscene = Scene.find_by(:room_id => room.id, :aff => 0)
+      userscene = Scene.find_by(:room_id => room.id, :aff => user.id)
 
       systemscene.meshes.each do |mesh|
         @servertext[:meshes_id].push(mesh.uuid)
@@ -134,7 +135,7 @@ class RoomsController < ApplicationController
 
       len_t = @servertext[:meshes_id].length
       len_s = @servershadow[:meshes_id].length
-      for i in 0..len_t do
+      for i in 0...len_t do
         pre = @servershadow[:meshes_id].index(@servertext[:meshes_id][i])
         unless pre
           ope = [  "mesh",
@@ -145,7 +146,7 @@ class RoomsController < ApplicationController
         end
       end
 
-      for i in 0..len_s do
+      for i in 0...len_s do
         pre = @servertext[:meshes_id].index(@servershadow[:meshes_id][i])
         unless pre
           ope = [  "demesh",
@@ -158,18 +159,28 @@ class RoomsController < ApplicationController
 
       len_t = @servertext[:faces_id].length
       len_s = @servershadow[:faces_id].length
-      for i in 0..len_t do
+      for i in 0...len_t do
         pre = @servershadow[:faces_id].index(@servertext[:faces_id][i])
         unless pre
+          face_array = []
+          systemscene.meshes.each do |mesh|
+            mesh.faces.each do |face|
+              face.vertices.each do |vertex|
+                if vertex.axis == "x" && vertex.face_id == face.id
+                  face_array.push(vertex.uuid)
+                end
+              end
+            end
+          end
           ope = [  "face",
                    @servertext[:faces_id][i],
-                   0
+                   face_array
           ]
           edit.push(ope)
         end
       end
 
-      for i in 0..len_s do
+      for i in 0...len_s do
         pre = @servertext[:faces_id].index(@servershadow[:faces_id][i])
         unless pre
           ope = [  "deface",
@@ -192,40 +203,40 @@ class RoomsController < ApplicationController
 
       len_t = @servertext[:vertices_id].length
       len_s = @servershadow[:vertices_id].length
-      for i in 0..len_t do
+      for i in 0...len_t do
         pre = @servershadow[:vertices_id].index(@servertext[:vertices_id][i])
-        if pre
-          systemscene.meshes.each do |mesh|
-            mesh.faces.each do |face|
-              face.vertices.each do |vertex|
-                if vertex.uuid == @servertext[:vertices_id][i]
-                  if vertex.axis == "x"
-                    text[:x] = vertex.data
-                  elsif vertex.axis == "y"
-                    text[:y] = vertex.data
-                  elsif vertex.axis == "z"
-                    text[:z] = vertex.data
-                  end
+        systemscene.meshes.each do |mesh|
+          mesh.faces.each do |face|
+            face.vertices.each do |vertex|
+              if vertex.uuid == @servertext[:vertices_id][i]
+                if vertex.axis == "x"
+                  text[:x] = vertex.data
+                elsif vertex.axis == "y"
+                  text[:y] = vertex.data
+                elsif vertex.axis == "z"
+                  text[:z] = vertex.data
                 end
               end
             end
           end
+        end
 
-          userscene.meshes.each do |mesh|
-            mesh.faces.each do |face|
-              face.vertices.each do |vertex|
-                if vertex.uuid == @servertext[:vertices_id][i]
-                  if vertex.axis == "x"
-                    shado[:x] = vertex.data
-                  elsif vertex.axis == "y"
-                    shado[:y] = vertex.data
-                  elsif vertex.axis == "z"
-                    shado[:z] = vertex.data
-                  end
+        userscene.meshes.each do |mesh|
+          mesh.faces.each do |face|
+            face.vertices.each do |vertex|
+              if vertex.uuid == @servershadow[:vertices_id][i]
+                if vertex.axis == "x"
+                  shado[:x] = vertex.data
+                elsif vertex.axis == "y"
+                  shado[:y] = vertex.data
+                elsif vertex.axis == "z"
+                  shado[:z] = vertex.data
                 end
               end
             end
           end
+        end
+        if pre
           if text[:x] != shado[:x] || text[:y] != shado[:y] || text[:z] != shado[:z]
             ope = [  "move",
                      @servertext[:vertices_id][i],
@@ -250,7 +261,41 @@ class RoomsController < ApplicationController
         end
       end
 
-      for i in 0..len_s do
+      for i in 0...len_s do
+
+        systemscene.meshes.each do |mesh|
+          mesh.faces.each do |face|
+            face.vertices.each do |vertex|
+              if vertex.uuid == @servertext[:vertices_id][i]
+                if vertex.axis == "x"
+                  text[:x] = vertex.data
+                elsif vertex.axis == "y"
+                  text[:y] = vertex.data
+                elsif vertex.axis == "z"
+                  text[:z] = vertex.data
+                end
+              end
+            end
+          end
+        end
+
+        userscene.meshes.each do |mesh|
+          mesh.faces.each do |face|
+            face.vertices.each do |vertex|
+              if vertex.uuid == @servershadow[:vertices_id][i]
+                if vertex.axis == "x"
+                  shado[:x] = vertex.data
+                elsif vertex.axis == "y"
+                  shado[:y] = vertex.data
+                elsif vertex.axis == "z"
+                  shado[:z] = vertex.data
+                end
+              end
+            end
+          end
+        end
+
+
         pre = @servertext[:vertices_id].index(@servershadow[:vertices_id][i])
         unless pre
           ope = [  "remove",
@@ -363,6 +408,13 @@ class RoomsController < ApplicationController
           end
         end
       end
+    end
+
+    def makeshadow(room,user)
+      @scene = room.scenes.create(
+        :aff => user.id
+      )
+      @scene.save
     end
 
     def shadow(room, user)
