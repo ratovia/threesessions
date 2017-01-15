@@ -2,12 +2,12 @@
   2. /rooms/join  makeshadow serverShadow
   3. JS clientText [] clientShadow []
   4. post []
-5. /rooms/post []
-6. patch
-7. diff
-8. makeshadow serverShadow
-9. render diff
-10. JS client patch
+  5. /rooms/post []
+  6. patch
+  7. diff
+  8. makeshadow serverShadow
+  9. render diff
+  10. JS client patch
 11. 目に見える
 12. 編集する
-３に戻る
+  ３に戻る
