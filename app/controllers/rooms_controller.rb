@@ -32,28 +32,39 @@ class RoomsController < ApplicationController
   def post
     @room = Room.find(params[:room_id])
     @user = User.find(params[:user_id])
-    # patch
     edit = JSON.parse(params[:edit])
+    patch(edit,0)
     patch(edit,@user.id)
-    # diff
     data = diff(@room,@user)
-    # data = []
-    # copy
     shadow(@room, @user)
-    # render
-    p data
     render json: data
-  end
-
-  def aaa
-    grant("system",2)
   end
 
   private
 
     def grant(user,type)
-      num = [user,type,SecureRandom.uuid].join('')
-      return num
+      last = SecureRandom.uuid
+      if type == 0
+        if Vertex.last
+          last = Vertex.last.id
+        else
+          last = 0
+        end
+      elsif type == 1
+        if Face.last
+          last = Face.last.id
+        else
+          last = 0
+        end
+
+      elsif type == 2
+        if Mesh.last
+          last = Mesh.last.id
+        else
+          last = 0
+        end
+      end
+      num = [user,type,last,SecureRandom.base64(3)].join('')
     end
 
     def seed(room)
@@ -63,15 +74,16 @@ class RoomsController < ApplicationController
       @scene.save
 
       @mesh = @scene.meshes.create(
-        :uuid => grant("system",2),
+        :uuid => grant(0,2),
       )
       @mesh.save
 
       @face = @mesh.faces.create(
-        :uuid => grant("system",1)
+        :uuid => grant(0,1)
       )
       @face.save
-      vertex_uuid = grant("system",0)
+
+      vertex_uuid = grant(0,0)
       @vertex1 = @face.vertices.create(
         :uuid => vertex_uuid,
         :axis => "x",
@@ -322,7 +334,7 @@ class RoomsController < ApplicationController
         if ope == 'add'
           scene.meshes.each do |mesh|
             mesh.faces.each do |face|
-              vertex_uuid = grant("system",0)
+              vertex_uuid = id
               @vertex1 = face.vertices.create(
                 :uuid => vertex_uuid,
                 :axis => "x",
@@ -356,26 +368,26 @@ class RoomsController < ApplicationController
         elsif ope == 'face'
           scene.meshes.each do |mesh|
             @face = mesh.faces.create(
-              :uuid => grant("system",1)
+              :uuid => id
             )
             @face.save
-            @vertex_x = Vertex.find_by(:uuid => data[0],:axis => "x").first
-            @vertex_y = Vertex.find_by(:uuid => data[1],:axis => "y").first
-            @vertex_z = Vertex.find_by(:uuid => data[2],:axis => "z").first
+            @vertex_x = Vertex.find_by(:uuid => data[0],:axis => "x").data
+            @vertex_y = Vertex.find_by(:uuid => data[1],:axis => "y").data
+            @vertex_z = Vertex.find_by(:uuid => data[2],:axis => "z").data
             @vertex1 = @face.vertices.create(
-              :uuid => @vertex_x.uuid,
-              :axis => @vertex_x.axis,
-              :data => @vertex_x.data
+              :uuid => data[0],
+              :axis => "x",
+              :data => @vertex_x
             )
             @vertex2 = @face.vertices.create(
-              :uuid => @vertex_y.uuid,
-              :axis => @vertex_y.axis,
-              :data => @vertex_y.data
+              :uuid => @data[1],
+              :axis => "y",
+              :data => @vertex_y
             )
             @vertex3 = @face.vertices.create(
-              :uuid => @vertex_z.uuid,
-              :axis => @vertex_z.axis,
-              :data => @vertex_z.data
+              :uuid => data[2],
+              :axis => "z",
+              :data => @vertex_z
             )
             @vertex1.save
             @vertex2.save
