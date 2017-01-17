@@ -45,7 +45,7 @@ var log = function(){
 var syncronization = function(){
   var res = diff(clientText,clientShadow);
   log();
-  makeshadow(clientText);
+  clientShadow = makeshadow(clientText);
   console.log(res);
   $.ajax({
     url: "/rooms/post",
@@ -64,10 +64,10 @@ var syncronization = function(){
 
 var makeshadow = function(text){
   var shadow = {
-    'faces':text.faces,
-    'faces_id':text.faces_id,
-    'vertices':text.vertices,
-    'vertices_id':text.vertices_id
+    'faces':text.faces.concat(),
+    'faces_id':text.faces_id.concat(),
+    'vertices':text.vertices.concat(),
+    'vertices_id':text.vertices_id.concat()
   };
   return shadow
 };

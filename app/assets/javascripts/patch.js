@@ -17,8 +17,9 @@ var patch = function(scene,edit){
       }
     }else if(ope == "remove"){
       if(has_id(scene,id,"vertex")){
-        scene.vertices_id.splice(scene.vertices_id.indexOf(id),1);
-        scene.vertices.splice(scene.vertices.indexOf(data[0],3));
+        var pos = scene.vertices_id.indexOf(id);
+        scene.vertices_id.splice(pos,1);
+        scene.vertices.splice(pos * 3,3);
       }
       
     }else if(ope == "face"){
@@ -38,7 +39,7 @@ var patch = function(scene,edit){
       }
     }else if(ope == "move"){
       for(var j = 0,l2 = data.length;j < l2;j++){
-        scene.vertices[scene.vertices_id.indexOf(id) + j] = data[j];
+        scene.vertices[scene.vertices_id.indexOf(id) * 3 + j] = data[j];
       }
     }
   }
