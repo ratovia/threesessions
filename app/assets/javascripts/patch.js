@@ -35,11 +35,30 @@ var patch = function(scene,edit){
       }
     }else if(ope == "deface"){
       if(has_id(scene,id,"face")){
-        scene.faces.splice(scene.faces_id.indexOf(id),1);
+        var index = scene.faces_id.indexOf(id);
+        scene.faces.splice(index,1);
+        scene.faces_id.splice(index,1)
       }
     }else if(ope == "move"){
       for(var j = 0,l2 = data.length;j < l2;j++){
         scene.vertices[scene.vertices_id.indexOf(id) * 3 + j] = data[j];
+      }
+    }else if(ope == "mesh"){
+      if(!has_id(scene,id,"mesh")){
+        scene.mesh_id.push(id);
+        var array = [];
+        for(var j = 0,l2 = data.length;j < l2;j++){
+          array.push(data[j]);
+        }
+        if(array.length > 0){
+          scene.mesh.push(array);
+        }
+      }
+    }else if(ope == "demesh"){
+      if(has_id(scene,id,"mesh")){
+        var index = scene.mesh_id.indexOf(id);
+        scene.mesh.splice(index,1);
+        scene.mesh_id.splice(index,1)
       }
     }
   }
@@ -54,6 +73,12 @@ var has_id = function(object,id,type){
     }
   }else if(type == "vertex"){
     if(object.vertices_id.indexOf(id) >= 0){
+      return true;
+    }else{
+      return false;
+    }
+  }else if(type = "mesh"){
+    if(object.mesh_id.indexOf(id) >= 0){
       return true;
     }else{
       return false;

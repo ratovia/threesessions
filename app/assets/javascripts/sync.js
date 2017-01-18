@@ -9,39 +9,6 @@ var log = function(){
   // $('.clientShadow').text("clientShadow " + JSON.stringify(clientShadow));
 };
 
-// var  clientText = {
-//   'faces':[[0,1,3,2],[2,3,7,6],[6,7,5,4],[1,0,4,5],[4,0,2,6]],
-//   'faces_id':[100,101,102,103,104],
-//   'vertices':[-1,-1,1,-1,1,1,-1,-1,-1,-1,1,-1,1,-1,1,1,1,1,1,1,-1],
-//   'vertices_id':[100,101,102,103,104,105,107]
-// };
-//
-// var  clientShadow = {
-//   'faces':[[0,1,3,2],[6,7,5,4],[1,0,4,5],[4,0,2,6]],
-//   'faces_id':[100,102,103,104],
-//   'vertices':[-1,1,1,-1,-1,-1,-1,1,-1,1,-1,1,1,1,1,1,-1,-1,1,1,-1],
-//   'vertices_id':[101,102,103,104,105,106,107]
-// };
-
-
-// var  clientShadow = {
-//   'faces':[],
-//   'faces_id':[],
-//   'vertices':[],
-//   'vertices_id':[]
-// };
-// var clientShadow = $.extend(true,{},clientText);
-// clientText.vertices[3] = 10;
-// clientText.vertices[4] = 10;
-// clientText.vertices[5] = 10;
-// console.log("edit");
-// log();
-//
-// console.log(res);
-// $('.edit').text("edit " + JSON.stringify(res));
-
-// log();
-
 var syncronization = function(){
   var res = diff(clientText,clientShadow);
   log();
@@ -64,6 +31,8 @@ var syncronization = function(){
 
 var makeshadow = function(text){
   var shadow = {
+    'mesh': text.mesh.concat(),
+    'mesh_id': text.mesh_id.concat(),
     'faces':text.faces.concat(),
     'faces_id':text.faces_id.concat(),
     'vertices':text.vertices.concat(),
@@ -74,6 +43,8 @@ var makeshadow = function(text){
 
 
 var  clientText = {
+  'mesh':[],
+  'mesh_id':[],
   'faces':[],
   'faces_id':[],
   'vertices':[],

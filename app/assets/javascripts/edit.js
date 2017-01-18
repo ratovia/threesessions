@@ -68,6 +68,25 @@ $('#move_button').click(function() {
   patch(clientText,edit);
 });
 
+$('#mesh_button').click(function() {
+  var edit = [];
+  var ope = [   "mesh",
+    grant($('div').data('user'),2),
+    0
+  ];
+  edit.push(ope);
+  patch(clientText,edit);
+});
+
+$('#demesh_button').click(function() {
+  var edit = [];
+  var ope = [   "demesh",
+    clientText.mesh_id[parseInt($(':text[name="demesh_index"]').val())],
+    0
+  ];
+  edit.push(ope);
+  patch(clientText,edit);
+});
 
 
 last = 1;

@@ -15,9 +15,11 @@ ActiveRecord::Schema.define(version: 20170111093451) do
   create_table "faces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "uuid"
     t.integer  "mesh_id"
+    t.integer  "scene_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["mesh_id"], name: "index_faces_on_mesh_id", using: :btree
+    t.index ["scene_id"], name: "index_faces_on_scene_id", using: :btree
   end
 
   create_table "meshes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -60,9 +62,11 @@ ActiveRecord::Schema.define(version: 20170111093451) do
     t.string   "axis"
     t.float    "data",       limit: 24
     t.integer  "face_id"
+    t.integer  "scene_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.index ["face_id"], name: "index_vertices_on_face_id", using: :btree
+    t.index ["scene_id"], name: "index_vertices_on_scene_id", using: :btree
   end
 
   add_foreign_key "rooms_users", "rooms"

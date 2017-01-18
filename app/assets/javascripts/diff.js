@@ -50,7 +50,6 @@ var diff = function(text,shadow){
 
   len_t = text.faces_id.length;
   len_s = shadow.faces_id.length;
-
   for(i = 0; i < len_t;i++){
     pre = shadow.faces_id.indexOf(text.faces_id[i]);
     if(pre < 0){
@@ -73,6 +72,30 @@ var diff = function(text,shadow){
     }
   }
 
+
+  len_t = text.mesh_id.length;
+  len_s = shadow.mesh_id.length;
+  for(i = 0; i < len_t;i++){
+    pre = shadow.mesh_id.indexOf(text.mesh_id[i]);
+    if(pre < 0){
+      ope = [  "mesh",
+        text.mesh_id[i],
+        text.mesh[i]
+      ];
+      edit.push(ope);
+    }
+  }
+
+  for(i = 0; i < len_s;i++){
+    pre = text.mesh_id.indexOf(shadow.mesh_id[i]);
+    if(pre < 0) {
+      ope = [  "demesh",
+        shadow.mesh_id[i],
+        shadow.mesh[i]
+      ];
+      edit.push(ope);
+    }
+  }
   return edit;
   //
   // [  "deface",
