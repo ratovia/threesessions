@@ -2,6 +2,7 @@
  * Created by ratovia on 2016/12/17.
  */
 var diff = function(text,shadow){
+  console.log("call diff function");
   var edit = [];
   var pre,ope;
   var len_t = text.vertices_id.length;
@@ -53,11 +54,12 @@ var diff = function(text,shadow){
   for(i = 0; i < len_t;i++){
     pre = shadow.faces_id.indexOf(text.faces_id[i]);
     if(pre >= 0) {
-      if(shadow.faces[pre] != text.faces[i]){
+      if(text.faces[i] != shadow.faces[pre]){
         ope = [  "face_update",
           text.faces_id[i],
           text.faces[i]
-        ]
+        ];
+        edit.push(ope);
       }
     }else{
       ope = [  "face_add",
@@ -89,7 +91,8 @@ var diff = function(text,shadow){
         ope = [  "mesh_update",
           text.mesh_id[i],
           text.mesh[i]
-        ]
+        ];
+        edit.push(ope);
       }
     }else{
       ope = [  "mesh_add",
