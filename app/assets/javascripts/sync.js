@@ -29,6 +29,18 @@ var syncronization = function(){
   });
 };
 
+// var sort_operation = function(data){
+//   for(var i = 0,l = data.length - 1 ;i < l;i++){
+//     for(var j = data.length - 1 ; j > i ; j--){
+//       if(data[j][0] == "add" && data[j - 1][0] == ""){
+//         var tmp = data[j].concat();
+//         data[j] = data[j-1];
+//         data[j-1] = tmp;
+//       }
+//     }
+//   }
+// };
+
 var makeshadow = function(text){
   var shadow = {
     'mesh': text.mesh.concat(),

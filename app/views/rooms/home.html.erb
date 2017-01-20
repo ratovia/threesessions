@@ -1,31 +1,35 @@
-<h2>Mesh</h2>
-<button id="mesh_button">作成</button>
-<h2>demesh</h2>
-<input type="text" name="demesh_index">
-<button id="demesh_button">削除</button>
-<h2>face</h2>
-<input type="text" name="face_1">
-<input type="text" name="face_2">
-<input type="text" name="face_3">
-<input type="text" name="face_4">
-<button id="face_button">作成</button>
-<h2>deface</h2>
-<input type="text" name="deface_uuid">
-<button id="deface_button">削除</button>
-<h2>add</h2>
-<input type="text" name="add_x">
-<input type="text" name="add_y">
-<input type="text" name="add_z">
-<button id="add_button">作成</button>
-<h2>remove</h2>
-<input type="text" name="remove_uuid">
-<button id="remove_button">削除</button>
-<h2>move</h2>
-<input type="text" name="move_x">
-<input type="text" name="move_y">
-<input type="text" name="move_z">
-<input type="text" name="move_uuid">
-<button id="move_button">移動</button>
+<h2>Mesh-add</h2>
+<button id="mesh_add_button">作成</button>
+<h2>Mesh-remove</h2>
+<input type="text" name="mesh_remove_index">
+<button id="mesh_remove_button">削除</button>
+<h2>Mesh-update</h2>
+<input type="text" name="mesh_update_data">
+<input type="text" name="mesh_update_index">
+<button id="mesh_update_button">更新</button>
+<h2>Face-add</h2>
+<button id="face_add_button">作成</button>
+<h2>Face-remove</h2>
+<input type="text" name="face_remove_index">
+<button id="face_remove_button">削除</button>
+<h2>Face-update</h2>
+<input type="text" name="face_update_data">
+<input type="text" name="face_update_index">
+<button id="face_update_button">更新</button>
+<h2>Vertex-add</h2>
+<input type="text" name="vertex_add_data_x">
+<input type="text" name="vertex_add_data_y">
+<input type="text" name="vertex_add_data_z">
+<button id="vertex_add_button">作成</button>
+<h2>Vertex-remove</h2>
+<input type="text" name="vertex_remove_index">
+<button id="vertex_remove_button">削除</button>
+<h2>Vertex-update</h2>
+<input type="text" name="vertex_update_data_x">
+<input type="text" name="vertex_update_data_y">
+<input type="text" name="vertex_update_data_z">
+<input type="text" name="vertex_update_index">
+<button id="vertex_update_button">更新</button>
 
 <div data-room="<%= @room.id%>" data-user="<%= @user.id %>"></div>
 <%= javascript_include_tag 'sync', 'data-turbolinks-track': 'reload' %>

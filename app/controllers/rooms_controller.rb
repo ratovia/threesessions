@@ -108,98 +108,25 @@ class RoomsController < ApplicationController
     end
 
     def diff(room,user)
-      # serverTextとserverShadowのデータの差分
       edit = []
+
       @servertext_array = {
+        :mesh => [],
         :meshes_id => [],
+        :faces => [],
         :faces_id => [],
+        :vertices => [],
         :vertices_id => []
       }
 
       @servershadow_array = {
+        :mesh => [],
         :meshes_id => [],
+        :faces => [],
         :faces_id => [],
+        :vertices => [],
         :vertices_id => []
       }
-
-      servertext = room.scenes.find_by(:aff => 0)
-      servershadow = room.scenes.find_by(:aff => user.id)
-
-
-      servertext.meshes.each do |mesh|
-        @servertext_array[:meshes_id].push(mesh.uuid)
-      end
-      servertext.faces.each do |face|
-        @servertext_array[:faces_id].push(face.uuid)
-      end
-      servertext.vertices.each do |vertex|
-        @servertext_array[:vertices_id].push(vertex.uuid)
-      end
-
-      servershadow.meshes.each do |mesh|
-        @servershadow_array[:meshes_id].push(mesh.uuid)
-      end
-      servershadow.faces.each do |face|
-        @servershadow_array[:faces_id].push(face.uuid)
-      end
-      servershadow.vertices.each do |vertex|
-        @servershadow_array[:vertices_id].push(vertex.uuid)
-      end
-
-      len_t = @servertext_array[:meshes_id].length
-      len_s = @servershadow_array[:meshes_id].length
-      for i in 0...len_t do
-        pre = @servershadow_array[:meshes_id].index(@servertext_array[:meshes_id][i])
-        unless pre
-          ope = [  "mesh",
-                   @servertext_array[:meshes_id][i],
-                   0
-          ]
-          edit.push(ope)
-        end
-      end
-
-      for i in 0...len_s do
-        pre = @servertext_array[:meshes_id].index(@servershadow_array[:meshes_id][i])
-        unless pre
-          ope = [  "demesh",
-                   @servershadow_array[:meshes_id][i],
-                   0
-          ]
-          edit.push(ope)
-        end
-      end
-
-      len_t = @servertext_array[:faces_id].length
-      len_s = @servershadow_array[:faces_id].length
-      for i in 0...len_t do
-        pre = @servershadow_array[:faces_id].index(@servertext_array[:faces_id][i])
-        unless pre
-          face_array = []
-          vertices = servertext.vertices.where(:face_id => @servertext_array[:faces_id][i])
-          vertices.each do | vertex |
-            if vertex.axis == "x"
-              face_array.push(vertex.uuid)
-            end
-          end
-          ope = [  "face",
-                   @servertext_array[:faces_id][i],
-                   face_array
-          ]
-          edit.push(ope)
-        end
-      end
-
-      for i in 0...len_s do
-        pre = @servertext_array[:faces_id].index(@servershadow_array[:faces_id][i])
-        unless pre
-          ope = [  "deface",
-                   @servershadow_array[:faces_id][i],
-                   0
-          ]
-          edit.push(ope)
-        end
-      end
 
       text = {
         :x => 0,
@@ -211,6 +138,136 @@ class RoomsController < ApplicationController
         :y => 0,
         :z => 0
       }
+      servertext = room.scenes.find_by(:aff => 0)
+      servershadow = room.scenes.find_by(:aff => user.id)
+      servertext.meshes.each do |mesh|
+        @servertext_array[:meshes_id].push(mesh.uuid)
+        array = []
+        mesh.faces.each do |face|
+          unless array.index(face.uuid)
+            array.push(face.uuid)
+          end
+        end
+        @servertext_array[:mesh].push(array)
+      end
+      servertext.faces.each do |face|
+        @servertext_array[:faces_id].push(face.uuid)
+        array = []
+        face.vertices.each do |vertex|
+          unless array.index(vertex.uuid)
+            array.push(vertex.uuid)
+          end
+        end
+        @servertext_array[:faces].push(array)
+      end
+      servertext.vertices.each do |vertex|
+        unless @servertext_array[:vertices_id].index(vertex.uuid)
+          @servertext_array[:vertices_id].push(vertex.uuid)
+        end
+      end
+      servershadow.meshes.each do |mesh|
+        @servershadow_array[:meshes_id].push(mesh.uuid)
+        array = []
+        mesh.faces.each do |face|
+          unless array.index(face.uuid)
+            array.push(face.uuid)
+          end
+        end
+        @servershadow_array[:mesh].push(array)
+      end
+      servershadow.faces.each do |face|
+        @servershadow_array[:faces_id].push(face.uuid)
+        array = []
+        face.vertices.each do |vertex|
+          unless array.index(vertex.uuid)
+            array.push(vertex.uuid)
+          end
+        end
+        @servershadow_array[:faces].push(array)
+      end
+      servershadow.vertices.each do |vertex|
+        unless @servershadow_array[:vertices_id].index(vertex.uuid)
+          @servershadow_array[:vertices_id].push(vertex.uuid)
+        end
+      end
+
+      p @servertext_array
+      p @servershadow_array
+
+      len_t = @servertext_array[:meshes_id].length
+      len_s = @servershadow_array[:meshes_id].length
+      for i in 0...len_t do
+        pre = @servershadow_array[:meshes_id].index(@servertext_array[:meshes_id][i])
+        if pre
+          if @servershadow_array[:mesh][pre] != @servertext_array[:mesh][i]
+            ope = [  "mesh_update",
+                     @servertext_array[:meshes_id][i],
+                     @servertext_array[:mesh][i]
+            ]
+            edit.push(ope)
+          end
+        else
+          ope = [  "mesh_add",
+                   @servertext_array[:meshes_id][i],
+                   0
+          ]
+          edit.push(ope)
+        end
+      end
+      for i in 0...len_s do
+        pre = @servertext_array[:meshes_id].index(@servershadow_array[:meshes_id][i])
+        unless pre
+          ope = [  "mesh_remove",
+                   @servershadow_array[:meshes_id][i],
+                   0
+          ]
+          edit.push(ope)
+        end
+      end
+
+
+
+
+      len_t = @servertext_array[:faces_id].length
+      len_s = @servershadow_array[:faces_id].length
+      for i in 0...len_t do
+        pre = @servershadow_array[:faces_id].index(@servertext_array[:faces_id][i])
+        if pre
+          if @servershadow_array[:faces][pre] != @servertext_array[:faces][i]
+            ope = [  "face_update",
+                     @servertext_array[:faces_id][i],
+                     @servertext_array[:faces][i]
+            ]
+            edit.push(ope)
+          end
+        else
+          face_array = []
+          vertices = servertext.vertices.where(:face_id => @servertext_array[:faces_id][i])
+          vertices.each do | vertex |
+            if vertex.axis == "x"
+              face_array.push(vertex.uuid)
+            end
+          end
+          ope = [  "face_add",
+                   @servertext_array[:faces_id][i],
+                   face_array
+          ]
+          edit.push(ope)
+        end
+      end
+      for i in 0...len_s do
+        pre = @servertext_array[:faces_id].index(@servershadow_array[:faces_id][i])
+        unless pre
+          ope = [  "face_remove",
+                   @servershadow_array[:faces_id][i],
+                   0
+          ]
+          edit.push(ope)
+        end
+      end
+
+
+
 
       len_t = @servertext_array[:vertices_id].length
       len_s = @servershadow_array[:vertices_id].length
@@ -229,7 +286,7 @@ class RoomsController < ApplicationController
         end
 
         servershadow.vertices.each do |vertex|
-          if vertex.uuid == @servershadow_array[:vertices_id][i]
+          if vertex.uuid == @servertext_array[:vertices_id][i]
             if vertex.axis == "x"
               shado[:x] = vertex.data
             elsif vertex.axis == "y"
@@ -242,7 +299,7 @@ class RoomsController < ApplicationController
 
         if pre
           if text[:x] != shado[:x] || text[:y] != shado[:y] || text[:z] != shado[:z]
-            ope = [  "move",
+            ope = [  "vertex_update",
                      @servertext_array[:vertices_id][i],
                      [
                          text[:x],
@@ -253,7 +310,7 @@ class RoomsController < ApplicationController
             edit.push(ope)
           end
         else
-          ope = [  "add",
+          ope = [  "vertex_add",
                    @servertext_array[:vertices_id][i],
                    [
                      text[:x],
@@ -264,11 +321,10 @@ class RoomsController < ApplicationController
           edit.push(ope)
         end
       end
-
       for i in 0...len_s do
 
         servertext.vertices.each do |vertex|
-          if vertex.uuid == @servertext_array[:vertices_id][i]
+          if vertex.uuid == @servershadow_array[:vertices_id][i]
             if vertex.axis == "x"
               text[:x] = vertex.data
             elsif vertex.axis == "y"
@@ -293,7 +349,7 @@ class RoomsController < ApplicationController
 
         pre = @servertext_array[:vertices_id].index(@servershadow_array[:vertices_id][i])
         unless pre
-          ope = [  "remove",
+          ope = [  "vertex_remove",
                    @servershadow_array[:vertices_id][i],
                    [
                      shado[:x],
@@ -304,6 +360,9 @@ class RoomsController < ApplicationController
           edit.push(ope)
         end
       end
+
+
+
       edit
     end
 
@@ -314,7 +373,39 @@ class RoomsController < ApplicationController
         ope = edit[i][0]
         id = edit[i][1]
         data = edit[i][2]
-        if ope == 'add'
+
+        if ope == 'mesh_add'
+          @mesh = scene.meshes.create(
+            :uuid => id
+          )
+          @mesh.save
+        elsif ope == 'mesh_remove'
+          mesh = scene.meshes.find_by(:uuid => id)
+          mesh.destroy
+        elsif ope == 'mesh_update'
+          mesh = scene.meshes.find_by(:uuid => id)
+          faces = scene.faces.where(:uuid => data)
+          faces.each do |face|
+            face.mesh_id = mesh.id
+            face.save
+          end
+        elsif ope == 'face_add'
+          @face = scene.faces.create(
+            :uuid => id
+          )
+          @face.save
+          face = scene.faces.find_by(:uuid => id)
+        elsif ope == 'face_remove'
+          face = scene.faces.find_by(:uuid => id)
+          face.destroy
+        elsif ope == 'face_update'
+          face = scene.faces.find_by(:uuid => id)
+          vertices = scene.vertices.where(:uuid => data)
+          vertices.each do |vertex|
+            vertex.faces_id = face.id
+            vertex.save
+          end
+        elsif ope == 'vertex_add'
           vertex_uuid = id
           @vertex1 = scene.vertices.create(
             :uuid => vertex_uuid,
@@ -334,59 +425,13 @@ class RoomsController < ApplicationController
           @vertex1.save
           @vertex2.save
           @vertex3.save
-        elsif ope == 'remove'
+        elsif ope == 'vertex_remove'
           scene.vertices.each do |vertex|
             if vertex.uuid == id
               vertex.destroy
             end
           end
-        elsif ope == 'face'
-          @face = scene.faces.create(
-            :uuid => id
-          )
-          @face.save
-          face = scene.faces.find_by(:uuid => id)
-          data.each do |uuid|
-            @vertex_x = Vertex.find_by(:uuid => uuid,:axis => "x").data
-            @vertex_y = Vertex.find_by(:uuid => uuid,:axis => "y").data
-            @vertex_z = Vertex.find_by(:uuid => uuid,:axis => "z").data
-            @vertex1 = scene.vertices.create(
-              :uuid => uuid,
-              :axis => "x",
-              :data => @vertex_x,
-              :face_id => face.id
-            )
-            @vertex2 = scene.vertices.create(
-              :uuid => uuid,
-              :axis => "y",
-              :data => @vertex_y,
-              :face_id => face.id
-
-            )
-            @vertex3 = scene.vertices.create(
-              :uuid => uuid,
-              :axis => "z",
-              :data => @vertex_z,
-              :face_id => face.id
-
-            )
-            @vertex1.save
-            @vertex2.save
-            @vertex3.save
-          end
-
-        elsif ope == 'mesh'
-          @mesh = scene.meshes.create(
-            :uuid => id
-          )
-          @mesh.save
-        elsif ope == 'demesh'
-          mesh = scene.meshes.find_by(:uuid => id)
-          mesh.destroy
-        elsif ope == 'deface'
-          face = scene.faces.find_by(:uuid => id)
-          face.destroy
-        elsif ope == 'move'
+        elsif ope == 'vertex_update'
           scene.vertices.each do |vertex|
             if vertex.uuid == id
               if vertex.axis == "x"

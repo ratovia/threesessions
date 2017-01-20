@@ -1,76 +1,9 @@
 /**
  * Created by ratovia on 2017/01/15.
  */
-$('#face_button').click(function() {
-  console.log("face");
+$('#mesh_add_button').click(function() {
   var edit = [];
-  var ope = [   "face",
-    grant($("div").data('user'),1),
-    [ 
-      $(':text[name="face_1"]').val(),
-      $(':text[name="face_2"]').val(),
-      $(':text[name="face_3"]').val(),
-      $(':text[name="face_4"]').val()
-    ]
-  ];
-  edit.push(ope);
-  patch(clientText,edit);
-});
-
-$('#deface_button').click(function() {
-  var edit = [];
-  var ope = [   "deface",
-    $(':text[name="deface_uuid"]').val(),
-    0
-  ];
-  edit.push(ope);
-  patch(clientText,edit);
-
-});
-
-$('#add_button').click(function() {
-  var edit = [];
-  var ope = [   "add",
-    grant($('div').data('user'),0),
-    [
-      parseFloat($(':text[name="add_x"]').val()),
-      parseFloat($(':text[name="add_y"]').val()),
-      parseFloat($(':text[name="add_z"]').val())
-    ]
-  ];
-  edit.push(ope);
-  patch(clientText,edit);
-  console.log("aaa");
-  log();
-});
-
-$('#remove_button').click(function() {
-  var edit = [];
-  var ope = [   "remove",
-    $(':text[name="remove_uuid"]').val(),
-    0
-  ];
-  edit.push(ope);
-  patch(clientText,edit);
-});
-
-$('#move_button').click(function() {
-  var edit = [];
-  var ope = [   "move",
-    $(':text[name="move_uuid"]').val(),
-    [
-      parseFloat($(':text[name="move_x"]').val()),
-      parseFloat($(':text[name="move_y"]').val()),
-      parseFloat($(':text[name="move_z"]').val())
-    ]
-  ];
-  edit.push(ope);
-  patch(clientText,edit);
-});
-
-$('#mesh_button').click(function() {
-  var edit = [];
-  var ope = [   "mesh",
+  var ope = [   "mesh_add",
     grant($('div').data('user'),2),
     0
   ];
@@ -78,15 +11,96 @@ $('#mesh_button').click(function() {
   patch(clientText,edit);
 });
 
-$('#demesh_button').click(function() {
+$('#mesh_remove_button').click(function() {
   var edit = [];
-  var ope = [   "demesh",
-    clientText.mesh_id[parseInt($(':text[name="demesh_index"]').val())],
+  var ope = [   "mesh_remove",
+    clientText.mesh_id[parseInt($(':text[name="mesh_remove_index"]').val())],
     0
   ];
   edit.push(ope);
   patch(clientText,edit);
 });
+
+$('#mesh_update_button').click(function() {
+  var edit = [];
+  var ope = [   "mesh_update",
+    clientText.mesh_id[parseInt($(':text[name="mesh_update_index"]').val())],
+    clientText.faces_id[parseInt($(':text[name="mesh_update_data"]').val())]
+  ];
+  edit.push(ope);
+  patch(clientText,edit);
+});
+
+$('#face_add_button').click(function() {
+  var edit = [];
+  var ope = [   "face_add",
+    grant($("div").data('user'),1),
+    0
+  ];
+  edit.push(ope);
+  patch(clientText,edit);
+});
+
+$('#face_remove_button').click(function() {
+  var edit = [];
+  var ope = [   "face_remove",
+    clientText.faces_id[parseInt($(':text[name="face_remove_index"]').val())],
+    0
+  ];
+  edit.push(ope);
+  patch(clientText,edit);
+
+});
+
+$('#face_update_button').click(function() {
+  var edit = [];
+  var ope = [   "face_update",
+    clientText.faces_id[parseInt($(':text[name="face_update_index"]').val())],
+    clientText.vertices_id[parseInt($(':text[name="face_update_data"]').val())]
+  ];
+  edit.push(ope);
+  patch(clientText,edit);
+});
+
+$('#vertex_add_button').click(function() {
+  var edit = [];
+  var ope = [   "vertex_add",
+    grant($('div').data('user'),0),
+    [
+      parseFloat($(':text[name="vertex_add_data_x"]').val()),
+      parseFloat($(':text[name="vertex_add_data_y"]').val()),
+      parseFloat($(':text[name="vertex_add_data_z"]').val())
+    ]
+  ];
+  edit.push(ope);
+  patch(clientText,edit);
+});
+
+$('#vertex_remove_button').click(function() {
+  var edit = [];
+  var ope = [   "vertex_remove",
+    clientText.vertices_id[parseInt($(':text[name="vertex_remove_index"]').val())],
+    0
+  ];
+  edit.push(ope);
+  patch(clientText,edit);
+});
+
+$('#vertex_update_button').click(function() {
+  var edit = [];
+  var ope = [   "vertex_update",
+    clientText.vertices_id[parseInt($(':text[name="vertex_update_index"]').val())],
+    [
+      parseFloat($(':text[name="vertex_update_data_x"]').val()),
+      parseFloat($(':text[name="vertex_update_data_y"]').val()),
+      parseFloat($(':text[name="vertex_update_data_z"]').val())
+    ]
+  ];
+  edit.push(ope);
+  patch(clientText,edit);
+});
+
+
 
 
 last = 1;
