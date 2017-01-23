@@ -21,15 +21,14 @@ var patch = function(scene,edit){
       if (has_id(scene, id, "mesh")) {
         var index = scene.mesh_id.indexOf(id);
         scene.mesh.splice(index, 1);
-        scene.mesh_id.splice(index, 1)
+        scene.mesh_id.splice(index, 1);
+        // TODO 関連する面を消す
       }
     }else if(ope == "mesh_update"){
       if(has_id(scene,id,"mesh")){
-        var array = scene.mesh[scene.mesh_id.indexOf(id)].concat() || [];
-        if(has_id(scene,data,"face")){
-          array.push(data);
-        }
-        scene.mesh[scene.mesh_id.indexOf(id)] = array.concat();
+        var array = scene.mesh[scene.mesh_id.indexOf(id)].concat();
+        array.push(data);
+        scene.mesh[scene.mesh_id.indexOf(id)] = array;
       }
     }else if(ope == "face_add"){
       if(!has_id(scene,id,"face")){
@@ -44,15 +43,15 @@ var patch = function(scene,edit){
       if (has_id(scene, id, "face")) {
         var index = scene.faces_id.indexOf(id);
         scene.faces.splice(index, 1);
-        scene.faces_id.splice(index, 1)
+        scene.faces_id.splice(index, 1);
+        // TODO 関連する頂点も消す
       }
+
     }else if(ope == "face_update"){
       if(has_id(scene,id,"face")){
-        var array = scene.faces[scene.faces_id.indexOf(id)].concat() || [];
-        if(has_id(scene,data,"vertex")){
-          array.push(data);
-        }
-        scene.faces[scene.faces_id.indexOf(id)] = array.concat();
+        var array_f = scene.faces[scene.faces_id.indexOf(id)].concat();
+        array_f.push(data);
+        scene.faces[scene.faces_id.indexOf(id)] = array_f;
       }
     }else if(ope == "vertex_add"){
       if(!has_id(scene,id,"vertex")){

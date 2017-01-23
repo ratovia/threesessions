@@ -1,7 +1,7 @@
 /**
  * Created by ratovia on 2016/12/17.
  */
-const poling_time = 5000;
+const poling_time = 10000;
 var log = function(){
   console.log("clientText " + JSON.stringify(clientText));
   console.log("clientShadow " + JSON.stringify(clientShadow));

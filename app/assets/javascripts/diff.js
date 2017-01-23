@@ -54,7 +54,7 @@ var diff = function(text,shadow){
   for(i = 0; i < len_t;i++){
     pre = shadow.faces_id.indexOf(text.faces_id[i]);
     if(pre >= 0) {
-      if(text.faces[i] != shadow.faces[pre]){
+      if(JSON.stringify(text.faces[i]) != JSON.stringify(shadow.faces[pre])){
         ope = [  "face_update",
           text.faces_id[i],
           text.faces[i]
@@ -87,7 +87,7 @@ var diff = function(text,shadow){
   for(i = 0; i < len_t;i++){
     pre = shadow.mesh_id.indexOf(text.mesh_id[i]);
     if(pre >= 0) {
-      if(shadow.mesh[pre] != text.mesh[i]){
+      if(JSON.stringify(shadow.mesh[pre]) != JSON.stringify(text.mesh[i])){
         ope = [  "mesh_update",
           text.mesh_id[i],
           text.mesh[i]

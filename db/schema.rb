@@ -59,8 +59,9 @@ ActiveRecord::Schema.define(version: 20170111093451) do
 
   create_table "vertices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "uuid"
-    t.string   "axis"
+    t.string   "component"
     t.float    "data",       limit: 24
+    t.string   "pointer"
     t.integer  "face_id"
     t.integer  "scene_id"
     t.datetime "created_at",            null: false
