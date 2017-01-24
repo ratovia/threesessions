@@ -27,8 +27,12 @@ var patch = function(scene,edit){
     }else if(ope == "mesh_update"){
       if(has_id(scene,id,"mesh")){
         var array = scene.mesh[scene.mesh_id.indexOf(id)].concat();
-        array.push(data);
-        scene.mesh[scene.mesh_id.indexOf(id)] = array;
+        if(data[0] && scene.mesh.indexOf(data[0]) < 0 ){
+          array.push(data[0]);
+          scene.mesh[scene.mesh_id.indexOf(id)] = array;
+        }else{
+          scene.mesh[scene.mesh_id.indexOf(id)] = [];
+        }
       }
     }else if(ope == "face_add"){
       if(!has_id(scene,id,"face")){
@@ -50,8 +54,12 @@ var patch = function(scene,edit){
     }else if(ope == "face_update"){
       if(has_id(scene,id,"face")){
         var array_f = scene.faces[scene.faces_id.indexOf(id)].concat();
-        array_f.push(data);
-        scene.faces[scene.faces_id.indexOf(id)] = array_f;
+        if(data[0] && scene.faces.indexOf(data[0]) < 0){
+          array_f.push(data[0]);
+          scene.faces[scene.faces_id.indexOf(id)] = array_f;
+        }else{
+          scene.faces[scene.faces_id.indexOf(id)] = [];
+        }
       }
     }else if(ope == "vertex_add"){
       if(!has_id(scene,id,"vertex")){

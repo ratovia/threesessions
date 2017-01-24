@@ -80,10 +80,10 @@ class RoomsController < ApplicationController
       )
       @mesh.save
 
-      # @face = @scene.faces.create(
-      #   :uuid => grant(0,1),
-      # )
-      # @face.save
+      @face = @scene.faces.create(
+        :uuid => grant(0,1),
+      )
+      @face.save
 
       vertex_uuid = grant(0,0)
       @vertex1 = @scene.vertices.create(
@@ -100,6 +100,27 @@ class RoomsController < ApplicationController
         :uuid => vertex_uuid,
         :component => "z",
         :data => 10,
+      )
+
+      @vertex1.save
+      @vertex2.save
+      @vertex3.save
+
+      vertex_uuid = grant(0,0)
+      @vertex1 = @scene.vertices.create(
+        :uuid => vertex_uuid,
+        :component => "x",
+        :data => 20,
+      )
+      @vertex2 = @scene.vertices.create(
+        :uuid => vertex_uuid,
+        :component => "y",
+        :data => 20,
+      )
+      @vertex3 = @scene.vertices.create(
+        :uuid => vertex_uuid,
+        :component => "z",
+        :data => 20,
       )
 
       @vertex1.save
@@ -151,7 +172,9 @@ class RoomsController < ApplicationController
         @servertext_array[:mesh].push(array)
       end
       servertext.faces.each do |face|
-        @servertext_array[:faces_id].push(face.uuid)
+        unless @servertext_array[:faces_id].index(face.uuid)
+          @servertext_array[:faces_id].push(face.uuid)
+        end
         array = []
         face.vertices.each do |vertex|
           unless array.index(vertex.uuid)
@@ -176,7 +199,9 @@ class RoomsController < ApplicationController
         @servershadow_array[:mesh].push(array)
       end
       servershadow.faces.each do |face|
-        @servershadow_array[:faces_id].push(face.uuid)
+        unless @servershadow_array[:faces_id].index(face.uuid)
+          @servershadow_array[:faces_id].push(face.uuid)
+        end
         array = []
         face.vertices.each do |vertex|
           unless array.index(vertex.uuid)
@@ -392,6 +417,7 @@ class RoomsController < ApplicationController
             )
             @face.save
           end
+
         elsif ope == 'face_add'
           @face = scene.faces.create(
             :uuid => id
@@ -588,25 +614,24 @@ class RoomsController < ApplicationController
                 end
               end
             end
-
-            @vertex = @scene.vertices.create(
-              :uuid => uuid,
-              :component=> "x",
-              :data => text[:x],
-              :face_id => face.id
-            )
-            @vertex = @scene.vertices.create(
-              :uuid => uuid,
-              :component=> "y",
-              :data => text[:y],
-              :face_id => face.id
-            )
-            @vertex = @scene.vertices.create(
-              :uuid => uuid,
-              :component=> "z",
-              :data => text[:z],
-              :face_id => face.id
-            )
+              @vertex = face.vertices.create(
+                :uuid => uuid,
+                :component=> "x",
+                :data => text[:x],
+                :scene_id => @scene.id
+              )
+              @vertex = face.vertices.create(
+                :uuid => uuid,
+                :component=> "y",
+                :data => text[:y],
+                :scene_id => @scene.id
+              )
+              @vertex = face.vertices.create(
+                :uuid => uuid,
+                :component=> "z",
+                :data => text[:z],
+                :scene_id => @scene.id
+              )
           end
         end
       end

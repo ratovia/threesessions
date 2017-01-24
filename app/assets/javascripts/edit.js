@@ -25,7 +25,9 @@ $('#mesh_update_button').click(function() {
   var edit = [];
   var ope = [   "mesh_update",
     clientText.mesh_id[parseInt($(':text[name="mesh_update_index"]').val())],
-    clientText.faces_id[parseInt($(':text[name="mesh_update_data"]').val())]
+    [
+      clientText.faces_id[parseInt($(':text[name="mesh_update_data"]').val())]
+    ]
   ];
   edit.push(ope);
   patch(clientText,edit);
@@ -56,7 +58,9 @@ $('#face_update_button').click(function() {
   var edit = [];
   var ope = [   "face_update",
     clientText.faces_id[parseInt($(':text[name="face_update_index"]').val())],
-    clientText.vertices_id[parseInt($(':text[name="face_update_data"]').val())]
+    [
+      clientText.vertices_id[parseInt($(':text[name="face_update_data"]').val())]
+    ]
   ];
   edit.push(ope);
   patch(clientText,edit);

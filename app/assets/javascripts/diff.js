@@ -5,6 +5,7 @@ var diff = function(text,shadow){
   console.log("call diff function");
   var edit = [];
   var pre,ope;
+  
   var len_t = text.vertices_id.length;
   var len_s = shadow.vertices_id.length;
   for(var i = 0; i < len_t;i++){
@@ -31,7 +32,6 @@ var diff = function(text,shadow){
       edit.push(ope);
     }
   }
-
   for(i = 0; i < len_s;i++){
     pre = text.vertices_id.indexOf(shadow.vertices_id[i]);
     if(pre < 0) {
@@ -45,10 +45,7 @@ var diff = function(text,shadow){
       edit.push(ope);
     }
   }
-
-
-
-
+  
   len_t = text.faces_id.length;
   len_s = shadow.faces_id.length;
   for(i = 0; i < len_t;i++){
@@ -69,7 +66,6 @@ var diff = function(text,shadow){
       edit.push(ope);
     }
   }
-
   for(i = 0; i < len_s;i++){
     pre = text.faces_id.indexOf(shadow.faces_id[i]);
     if(pre < 0) {
@@ -102,7 +98,6 @@ var diff = function(text,shadow){
       edit.push(ope);
     }
   }
-
   for(i = 0; i < len_s;i++){
     pre = text.mesh_id.indexOf(shadow.mesh_id[i]);
     if(pre < 0) {
