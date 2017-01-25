@@ -128,93 +128,89 @@ class RoomsController < ApplicationController
       @vertex3.save
     end
 
-    def diff(room,user)
-      edit = []
+  def diff(room,user)
+    edit = []
+    servertext = room.scenes.find_by(:aff => 0)
+    servershadow = room.scenes.find_by(:aff => user.id)
 
-      @servertext_array = {
-        :mesh => [],
-        :meshes_id => [],
-        :faces => [],
-        :faces_id => [],
-        :vertices => [],
-        :vertices_id => []
-      }
+    @servertext_array = {
+      :mesh => [],
+      :meshes_id => [],
+      :faces => [],
+      :faces_id => [],
+      :vertices => [],
+      :vertices_id => []
+    }
 
-      @servershadow_array = {
-        :mesh => [],
-        :meshes_id => [],
-        :faces => [],
-        :faces_id => [],
-        :vertices => [],
-        :vertices_id => []
-      }
+    @servershadow_array = {
+      :mesh => [],
+      :meshes_id => [],
+      :faces => [],
+      :faces_id => [],
+      :vertices => [],
+      :vertices_id => []
+    }
 
-      text = {
-        :x => 0,
-        :y => 0,
-        :z => 0
-      }
-      shado = {
-        :x => 0,
-        :y => 0,
-        :z => 0
-      }
-      servertext = room.scenes.find_by(:aff => 0)
-      servershadow = room.scenes.find_by(:aff => user.id)
-      servertext.meshes.each do |mesh|
-        @servertext_array[:meshes_id].push(mesh.uuid)
-        array = []
-        mesh.faces.each do |face|
-          unless array.index(face.uuid)
-            array.push(face.uuid)
-          end
-        end
-        @servertext_array[:mesh].push(array)
-      end
-      servertext.faces.each do |face|
-        unless @servertext_array[:faces_id].index(face.uuid)
-          @servertext_array[:faces_id].push(face.uuid)
-          array = []
-          face.vertices.each do |vertex|
-            unless array.index(vertex.uuid)
-              array.push(vertex.uuid)
-            end
-          end
-          @servertext_array[:faces].push(array)
+    servertext.meshes.each do |mesh|
+      @servertext_array[:meshes_id].push(mesh.uuid)
+      array = []
+      mesh.faces.each do |face|
+        unless array.index(face.uuid)
+          array.push(face.uuid)
         end
       end
-      servertext.vertices.each do |vertex|
-        unless @servertext_array[:vertices_id].index(vertex.uuid)
-          @servertext_array[:vertices_id].push(vertex.uuid)
+      @servertext_array[:mesh].push(array)
+    end
+    servertext.faces.each do |face|
+      @servertext_array[:faces_id].push(face.uuid)
+      array = []
+      face.vertices.each do |vertex|
+        unless array.index(vertex.uuid)
+          array.push(vertex.uuid)
         end
       end
-      servershadow.meshes.each do |mesh|
-        @servershadow_array[:meshes_id].push(mesh.uuid)
-        array = []
-        mesh.faces.each do |face|
-          unless array.index(face.uuid)
-            array.push(face.uuid)
-          end
-        end
-        @servershadow_array[:mesh].push(array)
+      @servertext_array[:faces].push(array)
+    end
+    servertext.vertices.each do |vertex|
+      unless @servertext_array[:vertices_id].index(vertex.uuid)
+        @servertext_array[:vertices_id].push(vertex.uuid)
+        vertex_x = servertext.vertices.find_by(:uuid => vertex.uuid, :component => "x")
+        vertex_y = servertext.vertices.find_by(:uuid => vertex.uuid, :component => "y")
+        vertex_z = servertext.vertices.find_by(:uuid => vertex.uuid, :component => "z")
+        @servertext_array[:vertices].push(vertex_x.data,vertex_y.data,vertex_z.data)
       end
-      servershadow.faces.each do |face|
-        unless @servershadow_array[:faces_id].index(face.uuid)
-          @servershadow_array[:faces_id].push(face.uuid)
-        end
-        array = []
-        face.vertices.each do |vertex|
-          unless array.index(vertex.uuid)
-            array.push(vertex.uuid)
-          end
-        end
-        @servershadow_array[:faces].push(array)
-      end
-      servershadow.vertices.each do |vertex|
-        unless @servershadow_array[:vertices_id].index(vertex.uuid)
-          @servershadow_array[:vertices_id].push(vertex.uuid)
+    end
+
+
+    servershadow.meshes.each do |mesh|
+      @servershadow_array[:meshes_id].push(mesh.uuid)
+      array = []
+      mesh.faces.each do |face|
+        unless array.index(face.uuid)
+          array.push(face.uuid)
         end
       end
+      @servershadow_array[:mesh].push(array)
+    end
+    servershadow.faces.each do |face|
+      @servershadow_array[:faces_id].push(face.uuid)
+      array = []
+      face.vertices.each do |vertex|
+        unless array.index(vertex.uuid)
+          array.push(vertex.uuid)
+        end
+      end
+      @servershadow_array[:faces].push(array)
+    end
+    servershadow.vertices.each do |vertex|
+      unless @servershadow_array[:vertices_id].index(vertex.uuid)
+        @servershadow_array[:vertices_id].push(vertex.uuid)
+        vertex_x = servershadow.vertices.find_by(:uuid => vertex.uuid, :component => "x")
+        vertex_y = servershadow.vertices.find_by(:uuid => vertex.uuid, :component => "y")
+        vertex_z = servershadow.vertices.find_by(:uuid => vertex.uuid, :component => "z")
+        @servershadow_array[:vertices].push(vertex_x.data,vertex_y.data,vertex_z.data)
+      end
+    end
 
       p @servertext_array
       p @servershadow_array
@@ -268,16 +264,9 @@ class RoomsController < ApplicationController
             edit.push(ope)
           end
         else
-          face_array = []
-          vertices = servertext.vertices.where(:face_id => @servertext_array[:faces_id][i])
-          vertices.each do | vertex |
-            if vertex.component == "x"
-              face_array.push(vertex.uuid)
-            end
-          end
           ope = [  "face_add",
                    @servertext_array[:faces_id][i],
-                   face_array
+                   0
           ]
           edit.push(ope)
         end
@@ -300,38 +289,14 @@ class RoomsController < ApplicationController
       len_s = @servershadow_array[:vertices_id].length
       for i in 0...len_t do
         pre = @servershadow_array[:vertices_id].index(@servertext_array[:vertices_id][i])
-        servertext.vertices.each do |vertex|
-          if vertex.uuid == @servertext_array[:vertices_id][i]
-            if vertex.component == "x"
-              text[:x] = vertex.data
-            elsif vertex.component == "y"
-              text[:y] = vertex.data
-            elsif vertex.component == "z"
-              text[:z] = vertex.data
-            end
-          end
-        end
-
-        servershadow.vertices.each do |vertex|
-          if vertex.uuid == @servertext_array[:vertices_id][i]
-            if vertex.component == "x"
-              shado[:x] = vertex.data
-            elsif vertex.component == "y"
-              shado[:y] = vertex.data
-            elsif vertex.component == "z"
-              shado[:z] = vertex.data
-            end
-          end
-        end
-
         if pre
-          if text[:x] != shado[:x] || text[:y] != shado[:y] || text[:z] != shado[:z]
+          if @servertext_array[:vertices][i * 3] != @servershadow_array[:vertices][pre * 3] || @servertext_array[:vertices][i * 3 + 1] != @servershadow_array[:vertices][pre * 3 + 1] || @servertext_array[:vertices][i * 3 + 2] != @servershadow_array[:vertices][pre * 3 + 2]
             ope = [  "vertex_update",
                      @servertext_array[:vertices_id][i],
                      [
-                         text[:x],
-                         text[:y],
-                         text[:z]
+                       @servertext_array[:vertices][i * 3],
+                       @servertext_array[:vertices][i * 3 + 1],
+                       @servertext_array[:vertices][i * 3 + 2]
                      ]
             ]
             edit.push(ope)
@@ -340,49 +305,20 @@ class RoomsController < ApplicationController
           ope = [  "vertex_add",
                    @servertext_array[:vertices_id][i],
                    [
-                     text[:x],
-                     text[:y],
-                     text[:z]
+                     @servertext_array[:vertices][i * 3],
+                     @servertext_array[:vertices][i * 3 + 1],
+                     @servertext_array[:vertices][i * 3 + 2]
                    ]
           ]
           edit.push(ope)
         end
       end
       for i in 0...len_s do
-
-        servertext.vertices.each do |vertex|
-          if vertex.uuid == @servershadow_array[:vertices_id][i]
-            if vertex.component == "x"
-              text[:x] = vertex.data
-            elsif vertex.component == "y"
-              text[:y] = vertex.data
-            elsif vertex.component == "z"
-              text[:z] = vertex.data
-            end
-          end
-        end
-
-        servershadow.vertices.each do |vertex|
-          if vertex.uuid == @servershadow_array[:vertices_id][i]
-            if vertex.component == "x"
-              shado[:x] = vertex.data
-            elsif vertex.component == "y"
-              shado[:y] = vertex.data
-            elsif vertex.component == "z"
-              shado[:z] = vertex.data
-            end
-          end
-        end
-
         pre = @servertext_array[:vertices_id].index(@servershadow_array[:vertices_id][i])
         unless pre
           ope = [  "vertex_remove",
                    @servershadow_array[:vertices_id][i],
-                   [
-                     shado[:x],
-                     shado[:y],
-                     shado[:z]
-                   ]
+                   0
           ]
           edit.push(ope)
         end
@@ -545,11 +481,11 @@ class RoomsController < ApplicationController
       servertext.vertices.each do |vertex|
         unless @servertext_array[:vertices_id].index(vertex.uuid)
           @servertext_array[:vertices_id].push(vertex.uuid)
+          vertex_x = servertext.vertices.find_by(:uuid => vertex.uuid, :component => "x")
+          vertex_y = servertext.vertices.find_by(:uuid => vertex.uuid, :component => "y")
+          vertex_z = servertext.vertices.find_by(:uuid => vertex.uuid, :component => "z")
+          @servertext_array[:vertices].push(vertex_x.data,vertex_y.data,vertex_z.data)
         end
-        vertex_x = servertext.vertices.find_by(:uuid => vertex.uuid, :component => "x")
-        vertex_y = servertext.vertices.find_by(:uuid => vertex.uuid, :component => "y")
-        vertex_z = servertext.vertices.find_by(:uuid => vertex.uuid, :component => "z")
-        @servertext_array[:vertices].push(vertex_x.data,vertex_y.data,vertex_z.data)
       end
 
 

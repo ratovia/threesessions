@@ -88,7 +88,9 @@ var diff = function(text,shadow){
       if(JSON.stringify(shadow.mesh[pre]) != JSON.stringify(text.mesh[i])){
         ope = [  "mesh_update",
           text.mesh_id[i],
-          text.mesh[i]
+          [
+            text.mesh[i][text.mesh[i].length - 1]     
+          ]
         ];
         edit.push(ope);
       }
