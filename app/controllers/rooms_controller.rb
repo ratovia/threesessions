@@ -221,13 +221,19 @@ class RoomsController < ApplicationController
         pre = @servershadow_array[:meshes_id].index(@servertext_array[:meshes_id][i])
         if pre
           if @servershadow_array[:mesh][pre] != @servertext_array[:mesh][i]
-            ope = [  "mesh_update",
-                     @servertext_array[:meshes_id][i],
-                     [
-                       @servertext_array[:mesh][i][@servertext_array[:mesh].length - 1]
-                     ]
-            ]
-            edit.push(ope)
+            for j in 0...@servertext_array[:mesh][i].length do
+              k = @servershadow_array[:mesh][pre].index(@servertext_array[:mesh][i][j])
+              unless k
+                ope = [  "mesh_update",
+                         @servertext_array[:meshes_id][i],
+                         [
+                           @servertext_array[:mesh][i][j]
+                         ]
+                ]
+                edit.push(ope)
+              end
+
+            end
           end
         else
           ope = [  "mesh_add",
@@ -257,13 +263,19 @@ class RoomsController < ApplicationController
         pre = @servershadow_array[:faces_id].index(@servertext_array[:faces_id][i])
         if pre
           if @servershadow_array[:faces][pre] != @servertext_array[:faces][i]
-            ope = [  "face_update",
-                     @servertext_array[:faces_id][i],
-                     [
-                      @servertext_array[:faces][i][@servertext_array[:faces][i].length - 1]
-                     ]
-            ]
-            edit.push(ope)
+            for j in 0...@servertext_array[:faces][i].length do
+              k = @servershadow_array[:faces][pre].index(@servertext_array[:faces][i][j])
+              unless k
+                ope = [  "face_update",
+                         @servertext_array[:faces_id][i],
+                         [
+                           @servertext_array[:faces][i][j]
+                         ]
+                ]
+                edit.push(ope)
+
+              end
+            end
           end
         else
           ope = [  "face_add",

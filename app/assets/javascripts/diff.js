@@ -14,7 +14,8 @@ var diff = function(text,shadow){
       if(shadow.vertices[pre * 3] != text.vertices[i * 3] || shadow.vertices[pre * 3 + 1] != text.vertices[i * 3 + 1] || shadow.vertices[pre * 3 + 2] != text.vertices[i * 3 + 2]){
         ope = [  "vertex_update",
                  shadow.vertices_id[pre],
-                 [  text.vertices[i * 3],
+                 [  
+                   text.vertices[i * 3],
                     text.vertices[i * 3 + 1],
                     text.vertices[i * 3 + 2]
                  ]
@@ -52,13 +53,18 @@ var diff = function(text,shadow){
     pre = shadow.faces_id.indexOf(text.faces_id[i]);
     if(pre >= 0) {
       if(JSON.stringify(text.faces[i]) != JSON.stringify(shadow.faces[pre])){
-        ope = [  "face_update",
-          text.faces_id[i],
-          [
-            text.faces[i][text.faces[i].length - 1]
-          ]
-        ];
-        edit.push(ope);
+        for(var j = 0; j < text.faces[i].length;j++){
+          k = shadow.faces[pre].indexOf(text.faces[i][j]);
+          if(k < 0){
+            ope = [  "face_update",
+              text.faces_id[i],
+              [
+                text.faces[i][j]
+              ]
+            ];
+            edit.push(ope);
+          }
+        }
       }
     }else{
       ope = [  "face_add",
@@ -86,13 +92,18 @@ var diff = function(text,shadow){
     pre = shadow.mesh_id.indexOf(text.mesh_id[i]);
     if(pre >= 0) {
       if(JSON.stringify(shadow.mesh[pre]) != JSON.stringify(text.mesh[i])){
-        ope = [  "mesh_update",
-          text.mesh_id[i],
-          [
-            text.mesh[i][text.mesh[i].length - 1]     
-          ]
-        ];
-        edit.push(ope);
+        for(var j = 0; j < text.mesh[i].length;j++){
+          k = shadow.mesh[pre].indexOf(text.mesh[i][j]);
+          if(k < 0){
+            ope = [  "mesh_update",
+              text.mesh_id[i],
+              [
+                text.mesh[i][j]
+              ]
+            ];
+            edit.push(ope);
+          }
+        }
       }
     }else{
       ope = [  "mesh_add",
