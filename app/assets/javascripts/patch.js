@@ -2,7 +2,7 @@
  * Created by ratovia on 2016/12/17.
  */
 var patch = function(scene,edit){
-  console.log("call patch funciton");
+  // console.log("call patch funciton");
   var ope;
   for(var i = 0,l = edit.length; i < l;i++){
     ope = edit[i][0];

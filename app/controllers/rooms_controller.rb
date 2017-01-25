@@ -174,14 +174,14 @@ class RoomsController < ApplicationController
       servertext.faces.each do |face|
         unless @servertext_array[:faces_id].index(face.uuid)
           @servertext_array[:faces_id].push(face.uuid)
-        end
-        array = []
-        face.vertices.each do |vertex|
-          unless array.index(vertex.uuid)
-            array.push(vertex.uuid)
+          array = []
+          face.vertices.each do |vertex|
+            unless array.index(vertex.uuid)
+              array.push(vertex.uuid)
+            end
           end
+          @servertext_array[:faces].push(array)
         end
-        @servertext_array[:faces].push(array)
       end
       servertext.vertices.each do |vertex|
         unless @servertext_array[:vertices_id].index(vertex.uuid)
@@ -261,7 +261,9 @@ class RoomsController < ApplicationController
           if @servershadow_array[:faces][pre] != @servertext_array[:faces][i]
             ope = [  "face_update",
                      @servertext_array[:faces_id][i],
-                     @servertext_array[:faces][i]
+                     [
+                      @servertext_array[:faces][i][@servertext_array[:faces][i].length - 1]
+                     ]
             ]
             edit.push(ope)
           end
@@ -429,7 +431,6 @@ class RoomsController < ApplicationController
         elsif ope == 'face_update'
           face = scene.faces.find_by(:uuid => id)
           vertices = scene.vertices.where(:uuid => data[0])
-          # tmp = face.vertices.first
           vertices.each do |vertex|
             @vertex = scene.vertices.create(
               :uuid => vertex.uuid,
@@ -545,6 +546,10 @@ class RoomsController < ApplicationController
         unless @servertext_array[:vertices_id].index(vertex.uuid)
           @servertext_array[:vertices_id].push(vertex.uuid)
         end
+        vertex_x = servertext.vertices.find_by(:uuid => vertex.uuid, :component => "x")
+        vertex_y = servertext.vertices.find_by(:uuid => vertex.uuid, :component => "y")
+        vertex_z = servertext.vertices.find_by(:uuid => vertex.uuid, :component => "z")
+        @servertext_array[:vertices].push(vertex_x.data,vertex_y.data,vertex_z.data)
       end
 
 
@@ -594,44 +599,24 @@ class RoomsController < ApplicationController
           idx = @servertext_array[:vertices_id].index(uuid)
           if idx
             face = @scene.faces.find_by(:uuid => @servertext_array[:faces_id][i])
-
-            len_t = @servertext_array[:vertices_id].length
-            text = {
-              :x => 0,
-              :y => 0,
-              :z => 0
-            }
-            for i in 0...len_t do
-              servertext.vertices.each do |vertex|
-                if vertex.uuid == @servertext_array[:vertices_id][i]
-                  if vertex.component == "x"
-                    text[:x] = vertex.data
-                  elsif vertex.component == "y"
-                    text[:y] = vertex.data
-                  elsif vertex.component == "z"
-                    text[:z] = vertex.data
-                  end
-                end
-              end
-            end
-              @vertex = face.vertices.create(
-                :uuid => uuid,
-                :component=> "x",
-                :data => text[:x],
-                :scene_id => @scene.id
-              )
-              @vertex = face.vertices.create(
-                :uuid => uuid,
-                :component=> "y",
-                :data => text[:y],
-                :scene_id => @scene.id
-              )
-              @vertex = face.vertices.create(
-                :uuid => uuid,
-                :component=> "z",
-                :data => text[:z],
-                :scene_id => @scene.id
-              )
+            @vertex = face.vertices.create(
+              :uuid => uuid,
+              :component=> "x",
+              :data => @servertext_array[:vertices][idx],
+              :scene_id => @scene.id
+            )
+            @vertex = face.vertices.create(
+              :uuid => uuid,
+              :component=> "y",
+              :data => @servertext_array[:vertices][idx],
+              :scene_id => @scene.id
+            )
+            @vertex = face.vertices.create(
+              :uuid => uuid,
+              :component=> "z",
+              :data => @servertext_array[:vertices][idx],
+              :scene_id => @scene.id
+            )
           end
         end
       end

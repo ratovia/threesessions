@@ -1,10 +1,10 @@
 /**
  * Created by ratovia on 2016/12/17.
  */
-const poling_time = 10000;
+const poling_time = 7000;
 var log = function(){
   console.log("clientText " + JSON.stringify(clientText));
-  console.log("clientShadow " + JSON.stringify(clientShadow));
+  // console.log("clientShadow " + JSON.stringify(clientShadow));
   // $('.clientText').text("clientText " + JSON.stringify(clientText));
   // $('.clientShadow').text("clientShadow " + JSON.stringify(clientShadow));
 };

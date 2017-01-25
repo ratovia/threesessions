@@ -2,7 +2,7 @@
  * Created by ratovia on 2016/12/17.
  */
 var diff = function(text,shadow){
-  console.log("call diff function");
+  // console.log("call diff function");
   var edit = [];
   var pre,ope;
   
@@ -54,7 +54,9 @@ var diff = function(text,shadow){
       if(JSON.stringify(text.faces[i]) != JSON.stringify(shadow.faces[pre])){
         ope = [  "face_update",
           text.faces_id[i],
-          text.faces[i]
+          [
+            text.faces[i][text.faces[i].length - 1]
+          ]
         ];
         edit.push(ope);
       }
