@@ -128,7 +128,7 @@ class RoomsController < ApplicationController
       @vertex3.save
     end
 
-  def diff(room,user)
+    def diff(room,user)
     edit = []
     servertext = room.scenes.find_by(:aff => 0)
     servershadow = room.scenes.find_by(:aff => user.id)
@@ -223,7 +223,9 @@ class RoomsController < ApplicationController
           if @servershadow_array[:mesh][pre] != @servertext_array[:mesh][i]
             ope = [  "mesh_update",
                      @servertext_array[:meshes_id][i],
-                     @servertext_array[:mesh][i]
+                     [
+                       @servertext_array[:mesh][i][@servertext_array[:mesh].length - 1]
+                     ]
             ]
             edit.push(ope)
           end
@@ -362,8 +364,10 @@ class RoomsController < ApplicationController
           )
           @face.save
         elsif ope == 'face_remove'
-          face = scene.faces.find_by(:uuid => id)
-          face.destroy
+          faces = scene.faces.where(:uuid => id)
+          faces.each do |face|
+            face.destroy
+          end
         elsif ope == 'face_update'
           face = scene.faces.find_by(:uuid => id)
           vertices = scene.vertices.where(:uuid => data[0])

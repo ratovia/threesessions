@@ -22,7 +22,6 @@ var patch = function(scene,edit){
         var index = scene.mesh_id.indexOf(id);
         scene.mesh.splice(index, 1);
         scene.mesh_id.splice(index, 1);
-        // TODO 関連する面を消す
       }
     }else if(ope == "mesh_update"){
       if(has_id(scene,id,"mesh")){
@@ -48,7 +47,13 @@ var patch = function(scene,edit){
         var index = scene.faces_id.indexOf(id);
         scene.faces.splice(index, 1);
         scene.faces_id.splice(index, 1);
-        // TODO 関連する頂点も消す
+        for(var i = 0; i < scene.mesh.length;i++){
+          for(var j = 0; j < scene.mesh[i].length;j++){
+            if(scene.mesh[i][j] == id){
+              scene.mesh[i].splice(j,1)
+            }
+          }
+        }
       }
 
     }else if(ope == "face_update"){
@@ -73,6 +78,14 @@ var patch = function(scene,edit){
         var pos = scene.vertices_id.indexOf(id);
         scene.vertices_id.splice(pos,1);
         scene.vertices.splice(pos * 3,3);
+      //  もしfaceに頂点が含まれていたら消す
+        for(var i = 0; i < scene.faces.length;i++){
+          for(var j = 0; j < scene.faces[i].length;j++){
+            if(scene.faces[i][j] == id){
+              scene.faces[i].splice(j,1)
+            }
+          }
+        }
       }
     }else if(ope == "vertex_update"){
       if(has_id(scene,id,"vertex")){
