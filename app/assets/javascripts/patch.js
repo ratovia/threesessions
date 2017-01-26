@@ -2,7 +2,6 @@
  * Created by ratovia on 2016/12/17.
  */
 var patch = function(scene,edit){
-  // console.log("call patch funciton");
   var ope;
   for(var i = 0,l = edit.length; i < l;i++){
     ope = edit[i][0];
@@ -47,10 +46,10 @@ var patch = function(scene,edit){
         var index = scene.faces_id.indexOf(id);
         scene.faces.splice(index, 1);
         scene.faces_id.splice(index, 1);
-        for(var i = 0; i < scene.mesh.length;i++){
-          for(var j = 0; j < scene.mesh[i].length;j++){
-            if(scene.mesh[i][j] == id){
-              scene.mesh[i].splice(j,1)
+        for(var i2 = 0; i2 < scene.mesh.length;i2++){
+          for(var j = 0; j < scene.mesh[i2].length;j++){
+            if(scene.mesh[i2][j] == id){
+              scene.mesh[i2].splice(j,1)
             }
           }
         }
@@ -79,10 +78,10 @@ var patch = function(scene,edit){
         scene.vertices_id.splice(pos,1);
         scene.vertices.splice(pos * 3,3);
       //  もしfaceに頂点が含まれていたら消す
-        for(var i = 0; i < scene.faces.length;i++){
-          for(var j = 0; j < scene.faces[i].length;j++){
-            if(scene.faces[i][j] == id){
-              scene.faces[i].splice(j,1)
+        for(var i2 = 0; i2 < scene.faces.length;i2++){
+          for(var j = 0; j < scene.faces[i2].length;j++){
+            if(scene.faces[i2][j] == id){
+              scene.faces[i2].splice(j,1)
             }
           }
         }
