@@ -1,0 +1,56 @@
+\documentclass{AIabst}
+%\documentclass[master]{AIabst} %修論はこちら
+% 論文概要
+\input personal
+\begin{document}
+\makeAbstHeader
+%
+%
+%
+\section{背景}
+	近年, GoogleドキュメントやMicrosoft Word Onlineに代表される同期編集システムが注目されている.
+	従来のシステムはテキスト編集に関するものが主だが, 3D形状モデリングを対象にした研究もある.
+	同期編集の研究において, 同期する際に生じる編集の衝突を解消することは主な課題となっている.
+	編集の衝突の解消を可能とし, 広く使われている手法として操作変換がある.
+	CoMaya\cite{COMAYA}は操作変換を応用して3Dモデリングにおける同期を可能にした.
+	しかし, 既存の操作変換は, 面と頂点, オブジェクトと面などの依存関係がある要素に対する同期を可能としていない.
+	そのためCoMayaではオブジェクト単位の同期となる.
+	より柔軟に同期編集をするには, 頂点の操作も含めた３次元データの同期をする必要がある.
+	一方, 操作変換以外にDifferentional Syncronization(DS)\cite{DS}といった同期手法が研究されている.
+	しかし, テキスト編集における同期手法のため3次元データに適用するためには依存関係を考慮する必要がある.
+
+\section{目的}
+　本研究では, DSの同期手法に対して, 3次元データの依存関係を考慮したデータ管理の手法を提案する.
+  これにより, 複数人で3次元データを共有し同期編集可能な3Dモデリングソフトの開発を目指す.
+\section{システム}
+　本システムは同期手法としてDSを採用し, 編集の入力が可能なクライアントと, 編集のデータを管理するサーバプログラムによって構成される.
+  また, サーバの内部データを従来のテキストと同様に線形アドレス空間によって管理すると依存関係があった場合にうまくいかないため,
+  3次元モデリングで用いるエンティティごとにデータモデルを作成し, そのデータモデル間で依存関係を持つことによって解決する.
+  \subsection{Differentional Syncronization}
+  接続されたクライアントごとにクライアントの内部データ(ClientText)のコピーをクライアント側とサーバ側に用意し(ClientShadow・ServerShadow),
+  複数クライアントで共有するデータ(ServerText)をサーバ側に用意する.
+  クライアントはサーバから送信された差分データをClientTextとClientShadowに適用し, ClientTextとClientShadowの差を計算し編集データとしてサーバに送信する.
+  その後, ClientTextをClientShadowにコピーする.
+  サーバはクライアントから送信された差分データをServerTextとServerShadowに適用し, ServerTextとServerShadowの差を計算し編集データとしてクライアントに送信する.
+  その後, ServerTextをServerShadowにコピーする.
+  これらの一連の流れを繰り返し行い同期を図る.
+  \subsection{データ構造}
+  ServerTextと各クライアントのServerShadowを区別するためのシーンというデータモデルを定義する.
+  また, 3Dモデリングにあるオブジェクトを表現するためのメッシュ, 面, 頂点というデータモデルを用意する.
+  頂点のデータモデルは位置データを持ち, 面のデータモデルを親として設定する.面のデータモデルはメッシュのデータモデルを親として設定する.またシーンのデータモデルはメッシュ, 面, 頂点を子にもつ. 親を削除した場合, それに関係がある子も削除するようにする. また親が新しく作成された場合, 子はデータを複製しながら関係を作る.このデータを複製する構造によって関係を削除した際も, データは残るようになる.
+\section{実験と考察}
+　3つのクライアントごとに任意な命令50件をランダムなタイミングで発行した.
+  各クライアントに同期された内部データを比較し一致しているか確かめた.
+  実験結果より, 内部データが一致し同期可能であることを確認できた.
+\section{むすび}
+　現在の問題点としてオブジェクトのマテリアル情報がない点や面を構成する頂点の順番がない点があげられ3Dモデリングの同期機構としては不十分である.
+今後はこれらの実装をしていきたい.
+
+\begin{thebibliography}{9}
+	\bibitem{COMAYA}
+	Agustina, et al., ``CoMaya: Incorporating Advanced Collaboration Capabilities into 3D Digital Media Design Tools,'' {\it CSCW '08}, pp. 5--8, 2008.
+	\bibitem{DS}
+
+  Fraser,	Neil.	Differential Synchronization. In Proc.ACM DecEng 2009, 13-­‐20.
+\end{thebibliography}
+\end{document}
