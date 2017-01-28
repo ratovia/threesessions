@@ -3,7 +3,15 @@
  */
 const poling_time = 7000;
 var log = function(){
-  console.log("clientText " + JSON.stringify(clientText));
+  console.log("clientText = { " + "\n" +
+    "  'mesh': " + JSON.stringify(clientText.mesh) + "\n" +
+    "  'mesh_id': "  + JSON.stringify(clientText.mesh_id) + "\n" +
+    "  'faces': "  + JSON.stringify(clientText.faces) + "\n" +
+    "  'faces_id': "  + JSON.stringify(clientText.faces_id) + "\n" +
+    "  'vertices': "  + JSON.stringify(clientText.vertices) + "\n" +
+    "  'vertices_id': "  + JSON.stringify(clientText.vertices_id) + "\n" +
+    "}"
+  );
   // console.log("clientShadow " + JSON.stringify(clientShadow));
   // $('.clientText').text("clientText " + JSON.stringify(clientText));
   // $('.clientShadow').text("clientShadow " + JSON.stringify(clientShadow));
@@ -25,8 +33,10 @@ var syncronization = function(){
     console.log(data);
     patch(clientText,data);
     patch(clientShadow,data);
-    log()
+    log();
+    console.log("/////////////////////////////////////////");
   });
+
 };
 
 var makeshadow = function(text){

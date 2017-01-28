@@ -31,8 +31,10 @@
 <input type="text" name="vertex_update_index">
 <button id="vertex_update_button">更新</button>
 
+<button id="test_button">実験！</button>
 <div data-room="<%= @room.id%>" data-user="<%= @user.id %>"></div>
 <%= javascript_include_tag 'sync', 'data-turbolinks-track': 'reload' %>
 <%= javascript_include_tag 'patch', 'data-turbolinks-track': 'reload' %>
 <%= javascript_include_tag 'diff', 'data-turbolinks-track': 'reload' %>
 <%= javascript_include_tag 'edit', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'test', 'data-turbolinks-track': 'reload' %>
