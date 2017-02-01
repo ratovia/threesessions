@@ -18,4 +18,3 @@
 //= require TransformControls.js
 //= require Projector.js
 //= require OrbitControls.js
-

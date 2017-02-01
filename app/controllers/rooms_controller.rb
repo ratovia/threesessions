@@ -357,8 +357,10 @@ class RoomsController < ApplicationController
           )
           @mesh.save
         elsif ope == 'mesh_remove'
-          mesh = scene.meshes.find_by(:uuid => id)
-          mesh.destroy
+          meshes = scene.meshes.find_by(:uuid => id)
+          meshes.each do |mesh|
+            mesh.destroy
+          end
         elsif ope == 'mesh_update'
           mesh = scene.meshes.find_by(:uuid => id)
           faces = scene.faces.where(:uuid => data[0])
