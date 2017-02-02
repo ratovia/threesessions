@@ -3,9 +3,12 @@
  */
 // MAXTIME  = 180000;
 // MAXREQUEST = 50;
-MAXTIME  = 18000;
-MAXREQUEST = 5;
-OPERATION = ["mesh_add","mesh_remove","mesh_update","face_add","face_remove","face_update","vertex_add","vertex_remove","vertex_update"];
+MAXTIME  = 300000;
+MAXREQUEST = 50;
+OPERATION = ["mesh_add","mesh_remove","mesh_update",
+             "face_add","face_remove","face_update",
+             "vertex_add","vertex_remove","vertex_update"
+            ];
 var myrand = function(val){
   return Math.floor( Math.random() * val)
 };
@@ -57,7 +60,11 @@ var makeoperation = function(){
       break;
     case "vertex_add":
       target =  grant($('div').data('user'),0);
-      data = 0;
+      data = [
+        parseFloat((Math.random() * 100).toFixed(3)),
+        parseFloat((Math.random() * 100).toFixed(3)),
+        parseFloat((Math.random() * 100).toFixed(3))
+      ];
       break;
     case "vertex_remove":
       target = clientText.vertices_id[myrand(clientText.vertices_id.length)];

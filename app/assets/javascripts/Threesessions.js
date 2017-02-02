@@ -2,6 +2,6 @@
 //= require diff
 //= require patch
 //= require edit
-//= require test
+//=  require test
 
 var THREESESSIONS = THREESESSIONS || {};
