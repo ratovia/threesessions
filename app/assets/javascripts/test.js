@@ -14,6 +14,7 @@ var myrand = function(val){
 };
 
 $('#test_button').click(function() {
+  console.log("start jikken!");
   for (var i = 0; i < MAXREQUEST; i++) {
     let timerand = myrand(MAXTIME);
     setTimeout(function () {
@@ -23,6 +24,10 @@ $('#test_button').click(function() {
       patch(clientText, edit);
     }, timerand);
   }
+  setTimeout(function(){
+    log();
+    console.log("end jikken!");
+  },MAXTIME)
 });
   
 var makeoperation = function(){

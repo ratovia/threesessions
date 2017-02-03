@@ -19,9 +19,9 @@ var log = function(){
 
 var syncronization = function(){
   var res = diff(clientText,clientShadow);
-  log();
+  // log();
   clientShadow = makeshadow(clientText);
-  console.log(res);
+  // console.log(res);
   $.ajax({
     url: "/rooms/post",
     type: "post",
@@ -30,11 +30,13 @@ var syncronization = function(){
           "room_id" : $('div').data('room')
     }
   }).done(function(data){
-    console.log(data);
+    // console.log(data);
     patch(clientText,data);
     patch(clientShadow,data);
+    // log();
+    // console.log("/////////////////////////////////////////");
+  }).fail(function(data){
     log();
-    console.log("/////////////////////////////////////////");
   });
 
 };
