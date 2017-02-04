@@ -1,7 +1,7 @@
 /**
  * Created by ratovia on 2016/12/17.
  */
-const poling_time = 7000;
+const poling_time = 4000;
 var log = function(){
   console.log("clientText = { " + "\n" +
     "  'mesh': " + JSON.stringify(clientText.mesh) + "\n" +

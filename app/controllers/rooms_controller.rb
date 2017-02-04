@@ -37,7 +37,8 @@ class RoomsController < ApplicationController
     patch(edit,@user.id)
     data = diff(@room,@user)
     unless data == []
-      shadow(@room, @user)
+      # shadow(@room, @user)
+      patch(data,@user.id)
     end
     render json: data
   end
@@ -370,16 +371,17 @@ class RoomsController < ApplicationController
             mesh.destroy
           end
         elsif ope == 'mesh_update'
-          mesh = scene.meshes.find_by(:uuid => id)
           faces = scene.faces.where(:uuid => data[0])
-          faces.each do |face|
-            @face = scene.faces.create(
-              :uuid => face.uuid,
-              :mesh_id => mesh.id
-            )
-            @face.save
+          mesh = scene.meshes.find_by(:uuid => id)
+          if mesh
+            faces.each do |face|
+              @face = scene.faces.create(
+                :uuid => face.uuid,
+                :mesh_id => mesh.id
+              )
+              @face.save
+            end
           end
-
         elsif ope == 'face_add'
           @face = scene.faces.create(
             :uuid => id
@@ -393,14 +395,16 @@ class RoomsController < ApplicationController
         elsif ope == 'face_update'
           face = scene.faces.find_by(:uuid => id)
           vertices = scene.vertices.where(:uuid => data[0])
-          vertices.each do |vertex|
-            @vertex = scene.vertices.create(
-              :uuid => vertex.uuid,
-              :component => vertex.component,
-              :data => vertex.data,
-              :face_id => face.id
-            )
-            @vertex.save
+          if face
+            vertices.each do |vertex|
+              @vertex = scene.vertices.create(
+                :uuid => vertex.uuid,
+                :component => vertex.component,
+                :data => vertex.data,
+                :face_id => face.id
+              )
+              @vertex.save
+            end
           end
         elsif ope == 'vertex_add'
           vertex_uuid = id
@@ -456,6 +460,7 @@ class RoomsController < ApplicationController
     end
 
     def shadow(room, user)
+
       servershadow = room.scenes.find_by(:aff => user.id)
       servertext = room.scenes.find_by(:aff => 0)
 
@@ -524,10 +529,12 @@ class RoomsController < ApplicationController
           for j in 0...@servertext_array[:mesh][i].length do
             if face == @servertext_array[:mesh][i][j]
               mesh = @scene.meshes.find_by(:uuid => @servertext_array[:meshes_id][i])
-              @face = @scene.faces.create(
-                :uuid => face,
-                :mesh_id => mesh.id
-              )
+              if mesh
+                @face = @scene.faces.create(
+                  :uuid => face,
+                  :mesh_id => mesh.id
+                )
+              end
             end
           end
         end
@@ -557,24 +564,26 @@ class RoomsController < ApplicationController
           for j in 0...@servertext_array[:faces][i].length do
             if  @servertext_array[:vertices_id][k] == @servertext_array[:faces][i][j]
               face = @scene.faces.find_by(:uuid => @servertext_array[:faces_id][i] )
-              @vertex_x = @scene.vertices.create(
-                :uuid => @servertext_array[:vertices_id][k],
-                :data => @servertext_array[:vertices][k * 3],
-                :component => "x",
-                :face_id => face.id
-              )
-              @vertex_y = @scene.vertices.create(
-                :uuid => @servertext_array[:vertices_id][k],
-                :data => @servertext_array[:vertices][k * 3 + 1],
-                :component => "y",
-                :face_id => face.id
-              )
-              @vertex_z = @scene.vertices.create(
-                :uuid => @servertext_array[:vertices_id][k],
-                :data => @servertext_array[:vertices][k * 3 + 2],
-                :component => "z",
-                :face_id => face.id
-              )
+              if face
+                @vertex_x = @scene.vertices.create(
+                  :uuid => @servertext_array[:vertices_id][k],
+                  :data => @servertext_array[:vertices][k * 3],
+                  :component => "x",
+                  :face_id => face.id
+                )
+                @vertex_y = @scene.vertices.create(
+                  :uuid => @servertext_array[:vertices_id][k],
+                  :data => @servertext_array[:vertices][k * 3 + 1],
+                  :component => "y",
+                  :face_id => face.id
+                )
+                @vertex_z = @scene.vertices.create(
+                  :uuid => @servertext_array[:vertices_id][k],
+                  :data => @servertext_array[:vertices][k * 3 + 2],
+                  :component => "z",
+                  :face_id => face.id
+                )
+              end
             end
           end
         end
