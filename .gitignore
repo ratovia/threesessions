@@ -20,3 +20,5 @@ doc/
 .DS_Store
 .idea
 .secret
+/thesis/abst.pdf
+/thesis/thesis.pdf
