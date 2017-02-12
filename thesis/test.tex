@@ -3,23 +3,81 @@
 %    実験の目的
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{実験の目的}
-Differential Syncronizationに基づき, 本研究での提案手法による同期機構で３次元データは同期可能であるかどうか確かめるため実験を行う.
+Differential Syncronizationに基づき, 本研究での提案手法による同期機構で３次元データは同期可能であるかどうか確かめる.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    実験環境
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{実験の準備}
+データを編集するためにクライアントを用意し, クライアントのインターフェイスとして\ref{ope}節の基本命令と, \ref{固有id}節の固有IDを付与する機能を実装した.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    実験環境
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{実験環境}
-データを編集するため, クライアントのインターフェイスとして\ref{ope}節の基本命令と, サーバと同様に\ref{固有id}節の固有IDを付与した.
 本実験で使用したサーバの計算機環境を表\ref{server}に示す. また３つのクライアントの計算機環境を表\ref{client1}, 表\ref{client2}, 表\ref{client3}に示す.
+% ネットワーク
+\begin{table}[htbp]
+\begin{center}
+	\caption{使用するサーバのスペック}
+	\begin{tabular}{|l|l|} \hline
+		OS & aaa \\ \hline
+		CPU & aaa \\ \hline
+		メモリ & aaa \\ \hline
+    開発言語　& aaa \\ \hline
+		データベース & \\ \hline
+	\end{tabular}
+	\label{server}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+	\caption{使用するクライアント１のスペック}
+	\begin{tabular}{|l|l|} \hline
+		OS & aaa \\ \hline
+		CPU & aaa \\ \hline
+		メモリ & aaa \\ \hline
+    開発言語　& aaa \\ \hline
+	\end{tabular}
+	\label{client1}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+	\caption{使用するクライアント２のスペック}
+	\begin{tabular}{|l|l|} \hline
+		OS & aaa \\ \hline
+		CPU & aaa \\ \hline
+		メモリ & aaa \\ \hline
+    開発言語　& aaa \\ \hline
+	\end{tabular}
+	\label{client2}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+	\caption{使用するクライアント３のスペック}
+	\begin{tabular}{|l|l|} \hline
+		OS & aaa \\ \hline
+		CPU & aaa \\ \hline
+		メモリ & aaa \\ \hline
+    開発言語　& aaa \\ \hline
+	\end{tabular}
+	\label{client3}
+\end{center}
+\end{table}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    実験方法
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{実験方法}
-実験のためにサーバと3つのクライアントを用意し, クライアントごとに任意の基本命令50件をランダムなタイミングで発行した.
-
+クライアントを3つ用意し, 各クライアントごとに任意の基本命令50件を5分以内のランダムなタイミングで発行した. また, クライアントは4秒ごとに差分を計算しサーバからの返信が着き次第適用処理を行う. 最後のクライアントが実験を開始して5分10秒後に各クライアントのデータが一致しているか確かめる.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    実験結果
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{実験結果}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    考察
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

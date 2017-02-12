@@ -17,7 +17,7 @@
 衝突を解消するための同期機構にはいくつか選択肢があり, 後で変更することは困難なため, アプリケーション開発サイクルの早い段階で同期機構を選択する必要がある.
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[scale=0.4]{images/mujyun}
+    \includegraphics[scale=0.5]{images/mujyun}
     \caption{矛盾が生じる例}
     \label{mujyun}
   \end{center}
@@ -43,7 +43,7 @@ Edit-basedは, ユーザの全ての操作を他のユーザに反映させる�
 図\ref{ot}は図\ref{mujyun}の矛盾を操作変換を用いて解消した例である. 図\ref{mujyun}では, クライアントAがredを挿入した分の位置がずれが, クライアントBの操作に対応していなかったが, 操作変換によって図\ref{ot}にあるようにredの文字数分, 適用の際にクライアントBの命令のパラメータを更新する. これによりクライアントAとクライアントBの最終結果が一致する.
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[scale=0.4]{images/ot}
+    \includegraphics[scale=0.5]{images/ot}
     \caption{操作変換}
     \label{ot}
   \end{center}
@@ -53,7 +53,7 @@ Edit-basedは, ユーザの全ての操作を他のユーザに反映させる�
 three-way mergesは3つのデータを, サーバでマージし最新のファイルを作る同期手法である. three-way mergesの流れの概略図を図\ref{threeway}に示す. 図\ref{threeway}のように, あるユーザの編集と, そのユーザ以外のユーザによる編集, さらにベースとなる元ファイルのデータを, サーバでマージし最新のファイルを作る. その最新のファイルをユーザに送信し同期を行う. ベースとなる元ファイルの存在により, ユーザによる最新ではないデータに対する編集が行われても, データの矛盾は生じない.
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[scale=0.3]{images/threeway}
+    \includegraphics[scale=0.5]{images/threeway}
     \caption{three-way merges}
     \label{threeway}
   \end{center}
@@ -76,8 +76,8 @@ CoMayaは3D統合ソフトMayaのAPIを利用し, 3Dモデリングにおける�
 一次元に管理するため, オブジェクトと面や, 面と頂点間の依存関係を解決できておらず, オブジェクトの位置やマテリアルの同期に留まっている.
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[scale=0.5]{images/comaya}
-    \caption{CoMayaのシステム図}
+    \includegraphics[scale=0.6]{images/comaya}
+    \caption{CoMayaのシステム図\cite{COMAYA}}
     \label{comayapng}
   \end{center}
 \end{figure}
