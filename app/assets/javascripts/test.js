@@ -27,7 +27,7 @@ $('#test_button').click(function() {
   setTimeout(function(){
     log();
     console.log("end jikken!");
-  },MAXTIME + 5000)
+  },MAXTIME + 10000)
 });
   
 var makeoperation = function(){
