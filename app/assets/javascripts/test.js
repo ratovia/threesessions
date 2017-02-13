@@ -92,3 +92,58 @@ var makeoperation = function(){
   return ope
 };
 
+
+MAXTIME_2  = 300000;
+MAXREQUEST_2 = 5;
+OPERATION_2 = [
+  "face_add"
+];
+
+$('#test_button_2').click(function() {
+  console.log("start jikken2!");
+  var time = 0;
+  while(time < MAXTIME_2){
+    time += 5000;
+    for (var i = 0; i < MAXREQUEST_2; i++) {
+      setTimeout(function () {
+        let edit = [];
+        let ope = makeoperation();
+        edit.push(ope);
+        patch(clientText, edit);
+      }, time);
+    }
+  }
+  setTimeout(function(){
+    log();
+    console.log("end jikken!");
+  },MAXTIME + 10000)
+});
+
+
+MAXTIME_3  = 300000;
+OPERATION_3 = [
+  "face_add"
+];
+
+$('#test_button_3').click(function() {
+  console.log("start jikken2!");
+  var time = 0;
+  var request = 0;
+  while(time < MAXTIME_2){
+    time += 5000;
+    request = request + request;
+    for (var i = 0; i < request; i++) {
+      setTimeout(function () {
+        let edit = [];
+        let ope = makeoperation();
+        edit.push(ope);
+        patch(clientText, edit);
+      }, time);
+    }
+  }
+  setTimeout(function(){
+    log();
+    console.log("end jikken!");
+  },MAXTIME + 10000)
+});
+

@@ -3,7 +3,7 @@
  */
 const poling_time = 4000;
 var log = function(){
-  console.log("clientText = { " + "\n" +
+  console.log("clientdata = { " + "\n" +
     "  'mesh': " + JSON.stringify(clientText.mesh) + "\n" +
     "  'mesh_id': "  + JSON.stringify(clientText.mesh_id) + "\n" +
     "  'faces': "  + JSON.stringify(clientText.faces) + "\n" +
