@@ -93,8 +93,8 @@ var makeoperation = function(operation){
 };
 
 
-MAXTIME_2  = 300000;
-MAXREQUEST_2 = 5;
+MAXTIME_2  = 600000;
+MAXREQUEST_2 = 20;
 OPERATION_2 = [
   "face_add"
 ];
@@ -113,6 +113,7 @@ $('#test_button_2').click(function() {
       }, time);
     }
   }
+  console.log("operation setup");
   setTimeout(function(){
     log();
     console.log("end jikken!");
