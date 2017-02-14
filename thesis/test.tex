@@ -1,29 +1,26 @@
 \chapter{実験と考察}　\label{chap:test}
+\section{同期可能についての実験}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    実験の目的
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{実験の目的}
+\subsection{実験の目的}
 Differential Syncronizationに基づき, 本研究での提案手法による同期機構で３次元データは同期可能であるかどうか確かめる.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    実験環境
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{実験の準備}
-データを編集するためにクライアントを用意し, クライアントのインターフェイスとして\ref{ope}節の基本命令と, \ref{固有id}節の固有IDを付与する機能を実装した.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%    実験環境
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{実験環境}
-本実験で使用したサーバの計算機環境を表\ref{server}に示す. また３つのクライアントの計算機環境を表\ref{client1}, 表\ref{client2}, 表\ref{client3}に示す.
+\subsection{実験環境}
+本手法を実現するサーバとクライアントを実装する. 本実験使用したサーバの計算機環境を表\ref{server}に示す. また３つのクライアントの計算機環境を表\ref{client1}, 表\ref{client2}, 表\ref{client3}に示す.
 % ネットワーク
 \begin{table}[htbp]
 \begin{center}
 	\caption{使用するサーバのスペック}
 	\begin{tabular}{|l|l|} \hline
-		OS & aaa \\ \hline
-		CPU & aaa \\ \hline
-		メモリ & aaa \\ \hline
-    開発言語　& aaa \\ \hline
-		データベース & \\ \hline
+		OS & ubuntu \\ \hline
+		CPU &  Intel(R) Core(TM) i5--2520M CPU 2.50GHz\\ \hline
+		メモリ & 2144MB \\ \hline
+    開発言語　& Ruby \\ \hline
+		データベース & MySQL \\ \hline
+		Webサーバ & Puma\\ \hline
 	\end{tabular}
 	\label{server}
 \end{center}
@@ -33,10 +30,11 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 \begin{center}
 	\caption{使用するクライアント１のスペック}
 	\begin{tabular}{|l|l|} \hline
-		OS & aaa \\ \hline
-		CPU & aaa \\ \hline
-		メモリ & aaa \\ \hline
-    開発言語　& aaa \\ \hline
+		OS & Microsoft Windows 10 Pro \\ \hline
+		CPU & Intel(R) Core(TM) i7--2700K CPU 3.50GHz \\ \hline
+		メモリ & 8.00GB \\ \hline
+    開発言語　& JavaScript \\ \hline
+		% TODO ブラウザ
 	\end{tabular}
 	\label{client1}
 \end{center}
@@ -46,23 +44,38 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 \begin{center}
 	\caption{使用するクライアント２のスペック}
 	\begin{tabular}{|l|l|} \hline
-		OS & aaa \\ \hline
-		CPU & aaa \\ \hline
-		メモリ & aaa \\ \hline
-    開発言語　& aaa \\ \hline
+		OS & Microsoft Windows 10 Pro \\ \hline
+		CPU & Intel(R) Core(TM) i7--2700K CPU 3.50GHz \\ \hline
+		メモリ & 8.00GB \\ \hline
+    開発言語　& JavaScript \\ \hline
 	\end{tabular}
 	\label{client2}
 \end{center}
 \end{table}
 
+% \begin{table}[htbp]
+% \begin{center}
+% 	\caption{使用するクライアント２のスペック}
+% 	\begin{tabular}{|l|l|} \hline
+% 		OS & Microsoft Windows 10 Home \\ \hline
+% 		CPU & Intel(R) Core(TM) i7--4770K CPU 3.50GHz \\ \hline
+% 		メモリ & 15.9GB \\ \hline
+%     開発言語　& JavaScript HTML \\ \hline
+% 	\end{tabular}
+% 	\label{client2}
+% \end{center}
+% \end{table}
+
+
 \begin{table}[htbp]
 \begin{center}
 	\caption{使用するクライアント３のスペック}
 	\begin{tabular}{|l|l|} \hline
-		OS & aaa \\ \hline
-		CPU & aaa \\ \hline
-		メモリ & aaa \\ \hline
-    開発言語　& aaa \\ \hline
+		OS & macOS Sierra \\ \hline
+		% CPU & 1.6 GHz Intel Core i5 \\ \hline
+		CPU & Intel(R) Core(TM) i5-5250U CPU 1.6GHz \\ \hline
+		メモリ & 8GB \\ \hline
+    開発言語　& JavaScript HTML \\ \hline
 	\end{tabular}
 	\label{client3}
 \end{center}
@@ -71,14 +84,48 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    実験方法
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{実験方法}
-クライアントを3つ用意し, 各クライアントごとに任意の基本命令50件を5分以内のランダムなタイミングで発行した. また, クライアントは4秒ごとに差分を計算しサーバからの返信が着き次第適用処理を行う. 最後のクライアントが実験を開始して5分10秒後に各クライアントのデータが一致しているか確かめる.
+\subsection{実験方法}
+クライアントを3つ用意し, 各クライアントごとに任意の基本命令50件を5分以内のランダムなタイミングで発行した. 初期データとして図\ref{init}のように頂点２つと面１つオブジェクト１つ準備し, クライアント識別子はシステムが生成したとして0を与えた.
+\begin{figure}[htbp]
+ \begin{center}
+	 \includegraphics[scale=0.7]{images/init}
+	 \caption{初期データ}
+	 \label{init}
+ \end{center}
+\end{figure}
+また, クライアントは4秒ごとに差分を計算しサーバからの返信が着き次第適用処理を行う. 最後のクライアントが実験を開始して5分10秒後に各クライアントのデータが一致しているか確かめる.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    実験結果
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{実験結果}
+\subsection{実験結果}
+5分10秒後のクライアント1の結果を図\ref{kekka1}に, クライアント2の結果を図\ref{kekka2}に,クライアント3の結果を図\ref{kekka3}に示す.
+各図に示す通り, 各クライアントのデータは一致した.
+\begin{figure}[htbp]
+ \begin{center}
+	 \includegraphics[scale=0.7]{images/kekka1}
+	 \caption{クライアント1の結果}
+	 \label{kekka1}
+ \end{center}
+\end{figure}
+\begin{figure}[htbp]
+ \begin{center}
+	 \includegraphics[scale=0.7]{images/kekka2}
+	 \caption{クライアント2の結果}
+	 \label{kekka2}
+ \end{center}
+\end{figure}
+\begin{figure}[htbp]
+ \begin{center}
+	 \includegraphics[scale=0.35]{images/kekka3}
+	 \caption{クライアント3の結果}
+	 \label{kekka3}
+ \end{center}
+\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    考察
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{考察}
+\subsection{考察}
+各クライアントのデータが一致したので,
+本研究での提案手法による同期機構で３次元データは同期可能であった.
