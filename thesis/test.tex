@@ -1,5 +1,5 @@
 \chapter{実験と考察}　\label{chap:test}
-\section{同期可能についての実験}
+\section{動作実験}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    実験の目的
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -9,7 +9,7 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 %    実験環境
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{実験環境}
-本手法を実現するサーバとクライアントを実装する. 本実験使用したサーバの計算機環境を表\ref{server}に示す. また３つのクライアントの計算機環境を表\ref{client1}, 表\ref{client2}, 表\ref{client3}に示す.
+本手法を実現するサーバとクライアントを実装した. 本実験で使用したサーバの計算機環境を表\ref{server}に示す. また３つのクライアントの計算機環境を表\ref{client1}, 表\ref{client2}, 表\ref{client3}に示す.
 % ネットワーク
 \begin{table}[htbp]
 \begin{center}
@@ -22,7 +22,7 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 		データベース & MySQL \\ \hline
 		Webサーバ & Puma\\ \hline
 	\end{tabular}
-	\label{server}
+	\label{1_server}
 \end{center}
 \end{table}
 
@@ -36,7 +36,7 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
     開発言語　& JavaScript \\ \hline
 		% TODO ブラウザ
 	\end{tabular}
-	\label{client1}
+	\label{1_client1}
 \end{center}
 \end{table}
 
@@ -49,7 +49,7 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 		メモリ & 8.00GB \\ \hline
     開発言語　& JavaScript \\ \hline
 	\end{tabular}
-	\label{client2}
+	\label{1_client2}
 \end{center}
 \end{table}
 
@@ -77,7 +77,7 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 		メモリ & 8GB \\ \hline
     開発言語　& JavaScript HTML \\ \hline
 	\end{tabular}
-	\label{client3}
+	\label{1_client3}
 \end{center}
 \end{table}
 
@@ -85,7 +85,7 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 %    実験方法
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{実験方法}
-クライアントを3つ用意し, 各クライアントごとに任意の基本命令50件を5分以内のランダムなタイミングで発行した. 初期データとして図\ref{init}のように頂点２つと面１つオブジェクト１つ準備し, クライアント識別子はシステムが生成したとして0を与えた.
+クライアントを3つ用意し, 各クライアントごとに任意の基本命令50件を5分以内のランダムなタイミングで発行した. 初期データとして図\ref{init}のように頂点２つ, 面１つ, オブジェクト１つ準備し, クライアント識別子はシステムが生成したとして0を与えた.
 \begin{figure}[htbp]
  \begin{center}
 	 \includegraphics[scale=0.7]{images/init}
@@ -93,7 +93,7 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 	 \label{init}
  \end{center}
 \end{figure}
-また, クライアントは4秒ごとに差分を計算しサーバからの返信が着き次第適用処理を行う. 最後のクライアントが実験を開始して5分10秒後に各クライアントのデータが一致しているか確かめる.
+また, クライアントは4秒ごとに差分を計算しサーバからの返信が着き次第適用処理を行う. 最後のクライアントが実験を開始して5分10秒後に各クライアントのデータが一致しているか確かめた.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    実験結果
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
