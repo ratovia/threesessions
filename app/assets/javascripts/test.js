@@ -19,7 +19,7 @@ $('#test_button').click(function() {
     let timerand = myrand(MAXTIME);
     setTimeout(function () {
       let edit = [];
-      let ope = makeoperation();
+      let ope = makeoperation(OPERATION);
       edit.push(ope);
       patch(clientText, edit);
     }, timerand);
@@ -30,11 +30,11 @@ $('#test_button').click(function() {
   },MAXTIME + 10000)
 });
   
-var makeoperation = function(){
-  let operationrand = myrand(OPERATION.length);
+var makeoperation = function(operation){
+  let operationrand = myrand(operation.length);
 
   let target,data;
-  switch (OPERATION[operationrand]) {
+  switch (operation[operationrand]) {
     case "mesh_add":
       target =  grant($('div').data('user'),2);
       data = 0;
@@ -84,11 +84,67 @@ var makeoperation = function(){
       ];
       break;
   }
-  let ope = [   OPERATION[operationrand],
+  let ope = [   operation[operationrand],
     target,
     data
   ];
 
   return ope
 };
+
+
+MAXTIME_2  = 600000;
+MAXREQUEST_2 = 20;
+OPERATION_2 = [
+  "face_add"
+];
+
+$('#test_button_2').click(function() {
+  console.log("start jikken2!");
+  var time = 0;
+  while(time < MAXTIME_2){
+    time += 4000;
+    for (var i = 0; i < MAXREQUEST_2; i++) {
+      setTimeout(function () {
+        let edit = [];
+        let ope = makeoperation(OPERATION_2);
+        edit.push(ope);
+        patch(clientText, edit);
+      }, time);
+    }
+  }
+  console.log("operation setup");
+  setTimeout(function(){
+    log();
+    console.log("end jikken!");
+  },MAXTIME + 10000)
+});
+
+
+MAXTIME_3  = 40000;
+OPERATION_3 = [
+  "face_add"
+];
+
+$('#test_button_3').click(function() {
+  console.log("start jikken3!");
+  var time = 0;
+  var request = 1;
+  while(time < MAXTIME_3){
+    time += 4000;
+    request = request * 2;
+    for (var i = 0; i < request; i++) {
+      setTimeout(function () {
+        let edit = [];
+        let ope = makeoperation(OPERATION_3);
+        edit.push(ope);
+        patch(clientText, edit);
+      }, time);
+    }
+  }
+  setTimeout(function(){
+    log();
+    console.log("end jikken!");
+  },MAXTIME + 10000)
+});
 
