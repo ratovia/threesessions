@@ -103,7 +103,7 @@ $('#test_button_2').click(function() {
   console.log("start jikken2!");
   var time = 0;
   while(time < MAXTIME_2){
-    time += 5000;
+    time += 4000;
     for (var i = 0; i < MAXREQUEST_2; i++) {
       setTimeout(function () {
         let edit = [];

@@ -3,18 +3,15 @@
  */
 const poling_time = 4000;
 var log = function(){
-  console.log("clientdata = { " + "\n" +
-    "  'mesh': " + JSON.stringify(clientText.mesh) + "\n" +
-    "  'mesh_id': "  + JSON.stringify(clientText.mesh_id) + "\n" +
-    "  'faces': "  + JSON.stringify(clientText.faces) + "\n" +
-    "  'faces_id': "  + JSON.stringify(clientText.faces_id) + "\n" +
-    "  'vertices': "  + JSON.stringify(clientText.vertices) + "\n" +
-    "  'vertices_id': "  + JSON.stringify(clientText.vertices_id) + "\n" +
+  console.log("クライアントデータ = { " + "\n" +
+    "  '各オブジェクトがもつ面': " + JSON.stringify(clientText.mesh) + "\n" +
+    "  'オブジェクト': "  + JSON.stringify(clientText.mesh_id) + "\n" +
+    "  '各面がもつ頂点': "  + JSON.stringify(clientText.faces) + "\n" +
+    "  '面': "  + JSON.stringify(clientText.faces_id) + "\n" +
+    "  '各頂点の位置データ': "  + JSON.stringify(clientText.vertices) + "\n" +
+    "  '頂点': "  + JSON.stringify(clientText.vertices_id) + "\n" +
     "}"
   );
-  // console.log("clientShadow " + JSON.stringify(clientShadow));
-  // $('.clientText').text("clientText " + JSON.stringify(clientText));
-  // $('.clientShadow').text("clientShadow " + JSON.stringify(clientShadow));
 };
 
 var syncronization = function(){
