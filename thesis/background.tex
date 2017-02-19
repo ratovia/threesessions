@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{背景}
 近年, GoogleドキュメントやMicrosoft Word Onlineに代表されるテキスト編集を中心に, 同期編集システムの研究や開発が注目されている. 同期編集システムとは, 複数人で同一のデータを同時に編集できるシステムである. 複数人で行うため, 作業効率が上がることや, 他者が作っている部分を見ながら自分の作業している部分を修正できるメリットがある. また, 個々で作られたファイルをマージする手間も削減できる. 同期編集では, 複数のクライアントから様々な編集が行われるため, あるクライアントが最新ではないデータを編集する際に, 編集の衝突が起こる. 衝突が起こると各クライアントが扱うデータに矛盾が生じ, データの同期が失敗する可能性がある. データに矛盾が生じる例を図\ref{mujyun}に示す. 図\ref{mujyun}では, クライアントAの挿入命令をクライアントBが検知する前に, クライアントBが新たな挿入命令を送信している. よってお互いの命令を適用する際に, クライアントAが``red''を挿入した分の位置がずれてしまい, クライアントAとクライアントBの最終結果に矛盾が生じる. こういった衝突を解消することが同期編集の主な課題となっている. 衝突を解消するための同期機構にはいくつか選択肢があり, 後で変更することは困難なため, アプリケーション開発サイクルの早い段階で同期機構を選択する必要がある.
-\begin{figure}[htbp]
+\begin{figure}[]
   \begin{center}
     \includegraphics[scale=0.5]{images/mujyun}
     \caption{矛盾が生じる例}
@@ -35,7 +35,7 @@ Edit-basedは, クライアントの全ての操作を他のクライアント�
 操作変換は, ある編集操作のデータを, 以前に実行された編集操作の結果によって更新する仕組みである.
 これにより, 編集の衝突によるデータの矛盾を防ぐことができる.
 図\ref{ot}は図\ref{mujyun}の矛盾を操作変換を用いて解消した例である. 図\ref{mujyun}では, クライアントAが``red''を挿入した分の位置のずれが, クライアントBの操作に対応していなかったが, 操作変換によって図\ref{ot}にあるように``red''の文字数分, 適用の際にクライアントBの命令のパラメータを更新する. これによりクライアントAとクライアントBの最終結果が一致する.
-\begin{figure}[htbp]
+\begin{figure}[]
   \begin{center}
     \includegraphics[scale=0.5]{images/ot}
     \caption{操作変換}
@@ -45,38 +45,38 @@ Edit-basedは, クライアントの全ての操作を他のクライアント�
 %
 \subsection{three-way merges}
 three-way merges\cite{THREE}は3つのデータを, サーバでマージし最新のファイルを作る同期手法である. three-way mergesの流れの概略図を図\ref{threeway}に示す. 図\ref{threeway}のように, あるクライアントの編集と, そのクライアント以外のクライアントによる編集, さらにベースとなる元ファイルのデータを, サーバでマージし最新のファイルを作る. その最新のファイルをクライアントに送信し同期を行う. ベースとなる元ファイルの存在により, クライアントによる最新ではないデータに対する編集が行われても, データの矛盾は生じない.
-\begin{figure}[htbp]
+\begin{figure}[]
   \begin{center}
-    \includegraphics[scale=0.5]{images/threeway}
+    \includegraphics[scale=0.3]{images/threeway}
     \caption{three-way merges}
     \label{threeway}
   \end{center}
 \end{figure}
 %
 \subsection{Differential Synchronization}
-Differential Synchronizationは差分の計算とその適用によって同期を行う. 図\ref{DSfig}はDifferential SynchronizationのDual Shadow Methodの同期の流れである. なお, 図\ref{DSfig}中の各番号は処理の順番を表している.
-\begin{figure}[htbp]
+Differential Synchronizationは差分の計算とその適用によって同期を行う. 図\ref{DSfig}はDifferential SynchronizationのDual Shadow Methodの同期の流れである.
+\begin{figure}[]
   \begin{center}
-    \includegraphics[scale=0.7]{images/DS}
-    \caption{Dual Shadow Methodの流れ}
+    \includegraphics[scale=0.5]{images/Dual_shadow}
+    \caption{Dual Shadow Method\cite{DS}}
     \label{DSfig}
   \end{center}
 \end{figure}
 また, 図\ref{DSCT}はDual Shadow Methodの他クライアントも含めた概要図である.
-\begin{figure}[htbp]
+\begin{figure}[]
   \begin{center}
     \includegraphics[scale=0.3]{images/DSCT}
     \caption{Dual Shadow Methodの全体図}
     \label{DSCT}
   \end{center}
 \end{figure}
-Dual Shadow Methodは, クライアントデータとサーバデータの他に, クライアントとサーバに各データのシャドウコピーを用意する. 処理の流れとしては, まずクライアントデータとそのシャドウの(1)差分を計算しサーバに(2)送信する. 次に, クライアントでは(4)シャドウコピーを行い, サーバで(3)適用処理を行う. サーバ側でも同様の手順で処理することで同期が可能となる. サーバデータは複数クライアントから利用され, クライアントデータと２つのシャドウは接続しているクライアントごとに用意される. 2つのシャドウコピーは各適用処理の後, 必ず一致する仕組みになっている. 編集が衝突し, データに矛盾が生まれた場合でも, それぞれ差を計算し適用することによって各データが同一のものに収束する.
+Dual Shadow Methodは, ClientTextとServerTextの他に, クライアントとサーバに各データのシャドウコピーを用意する. 処理の流れとしては, まずClientTextとClientShadowの差分を計算し編集としてサーバに送信する. 次に, クライアントではシャドウコピーを作成し, サーバでは受信した差分の適用処理を行う. サーバ側でも同様の手順で処理することで同期が可能となる. ServerTextは複数のクライアントから利用され, ClientTextと２つのシャドウコピーは, 接続しているクライアントごとに用意される. 2つのシャドウコピーは各適用処理の後, 必ず一致する仕組みになっている. 編集が衝突し, データに矛盾が生まれた場合でも, それぞれ差を計算し適用することによって各データが同一のものに収束する.
 %
 \subsection{CoMaya}
 CoMayaは3D統合ソフトMayaのAPIを利用し, 3Dモデリングにおける同期編集を可能にしたものである.
 図\ref{comayapng}はCoMayaのシステム図であり, 図中の(a)はMayaのインターフェイス, (b)はオブジェクトとMayaのAPIの関係のグラフを表している. (c)はCoMayaによって拡張されたオブジェクトのデータとMayaのAPIを一次元で管理し, 操作変換を適用して同期を行う部分である.
 一次元に管理するため, オブジェクトと面や, 面と頂点間の依存関係を解決できておらず, オブジェクトの位置やマテリアルの同期に留まっている.
-\begin{figure}[htbp]
+\begin{figure}[]
   \begin{center}
     \includegraphics[scale=0.6]{images/comaya}
     \caption{CoMayaのシステム図\cite{COMAYA}}
@@ -97,4 +97,4 @@ WFEを参考にthree-way mergesの3次元データへの適用を試みた.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{目的}
 本研究では, 依存関係の扱いが操作変換より容易になり, 送受信の容量が少なくて済むと予想されるDifferential Synchronizationの同期手法に基づいて, 3次元データの依存関係を考慮した同期編集機構の手法を提案する.
-これにより, 複数人で同一の3次元データを同時に編集できる3Dモデリングソフトの開発を可能にする.
+サーバのデータを従来のテキストと同様に一次元で管理すると, 依存関係があった場合にデータの管理が困難となる. これに問題に対して, 3Dモデリングで用いるエンティティごとにデータモデルを定義し, そのデータモデル間で依存関係を持つことによって解決する. これにより, 複数人で同一の3次元データを同時に編集できる3Dモデリングソフトの開発を可能にする.

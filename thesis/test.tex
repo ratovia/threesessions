@@ -4,14 +4,15 @@
 %    実験の目的
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{実験の目的}
-Differential Syncronizationに基づき, 本研究での提案手法による同期機構で３次元データは同期可能であるかどうか確かめる.
+Differential Syncronizationに基づき, 本研究での提案手法による同期機構で３次元データは同期可能であるかを確かめる.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    実験環境
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{実験環境}
-本手法を実現するサーバとクライアントを実装した. 本実験で使用したサーバの計算機環境を表\ref{server}に示す. また３つのクライアントの計算機環境を表\ref{client1}, 表\ref{client2}, 表\ref{client3}に示す.
+本手法を実現するサーバとクライアントを実装した. 本実験で使用したサーバの計算機環境を表\ref{1_server}に示す. また３つのクライアントの計算機環境を表\ref{1_client1}, 表\ref{1_client2}, 表\ref{1_client3}に示す.
+サーバとクライアントは異なるネットーワーク上に配置し, 通信でのロスも発生する.
 % ネットワーク
-\begin{table}[htbp]
+\begin{table}[]
 \begin{center}
 	\caption{使用するサーバのスペック}
 	\begin{tabular}{|l|l|} \hline
@@ -25,8 +26,7 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 	\label{1_server}
 \end{center}
 \end{table}
-
-\begin{table}[htbp]
+\begin{table}[]
 \begin{center}
 	\caption{使用するクライアント１のスペック}
 	\begin{tabular}{|l|l|} \hline
@@ -40,7 +40,7 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 \end{center}
 \end{table}
 
-\begin{table}[htbp]
+\begin{table}[]
 \begin{center}
 	\caption{使用するクライアント２のスペック}
 	\begin{tabular}{|l|l|} \hline
@@ -52,22 +52,7 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 	\label{1_client2}
 \end{center}
 \end{table}
-
-% \begin{table}[htbp]
-% \begin{center}
-% 	\caption{使用するクライアント２のスペック}
-% 	\begin{tabular}{|l|l|} \hline
-% 		OS & Microsoft Windows 10 Home \\ \hline
-% 		CPU & Intel(R) Core(TM) i7--4770K CPU 3.50GHz \\ \hline
-% 		メモリ & 15.9GB \\ \hline
-%     開発言語　& JavaScript HTML \\ \hline
-% 	\end{tabular}
-% 	\label{client2}
-% \end{center}
-% \end{table}
-
-
-\begin{table}[htbp]
+\begin{table}[]
 \begin{center}
 	\caption{使用するクライアント３のスペック}
 	\begin{tabular}{|l|l|} \hline
@@ -80,15 +65,14 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 	\label{1_client3}
 \end{center}
 \end{table}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    実験方法
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{実験方法}
-クライアントを3つ用意し, 各クライアントごとに任意の基本命令50件を5分以内のランダムなタイミングで発行した. 初期データとして図\ref{init}のように頂点２つ, 面１つ, オブジェクト１つ準備し, クライアント識別子はシステムが生成したとして0を与えた.
-\begin{figure}[htbp]
+クライアントを3つ用意し, 各クライアントごとに任意の基本命令50件を5分以内のランダムなタイミングで発行した. 初期データとして図\ref{init}のように頂点２つ, 面１つ, オブジェクト１つ準備し, それぞれのクライアント識別子はシステムが生成したとして0を与えた.
+\begin{figure}[]
  \begin{center}
-	 \includegraphics[scale=0.7]{images/init}
+	 \includegraphics[scale=0.6]{images/init}
 	 \caption{初期データ}
 	 \label{init}
  \end{center}
@@ -98,31 +82,29 @@ Differential Syncronizationに基づき, 本研究での提案手法による同
 %    実験結果
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{実験結果}
-5分10秒後のクライアント1の結果を図\ref{kekka1}に, クライアント2の結果を図\ref{kekka2}に,クライアント3の結果を図\ref{kekka3}に示す.
+用意した全ての基本命令を処理した後のクライアント1の結果を図\ref{kekka1}に, クライアント2の結果を図\ref{kekka2}に,クライアント3の結果を図\ref{kekka3}に示す.
 各図に示す通り, 各クライアントのデータは一致した.
-\begin{figure}[htbp]
+\begin{figure}[]
  \begin{center}
-	 \includegraphics[scale=0.7]{images/kekka1}
+	 \includegraphics[scale=0.6]{images/kekka1}
 	 \caption{クライアント1の結果}
 	 \label{kekka1}
  \end{center}
 \end{figure}
-\begin{figure}[htbp]
+\begin{figure}[]
  \begin{center}
-	 \includegraphics[scale=0.7]{images/kekka2}
+	 \includegraphics[scale=0.6]{images/kekka2}
 	 \caption{クライアント2の結果}
 	 \label{kekka2}
  \end{center}
 \end{figure}
-\begin{figure}[htbp]
+\begin{figure}[]
  \begin{center}
-	 \includegraphics[scale=0.35]{images/kekka3}
+	 \includegraphics[scale=0.3]{images/kekka3}
 	 \caption{クライアント3の結果}
 	 \label{kekka3}
  \end{center}
 \end{figure}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    考察
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
