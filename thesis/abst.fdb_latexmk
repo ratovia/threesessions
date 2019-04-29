@@ -1,0 +1,25 @@
+# Fdb version 3
+["dvipdf"] 1486302592 "abst.dvi" "abst.pdf" "abst" 1486903534
+  "abst.dvi" 1486302592 8200 d20eb70b7a8e8f10fbc33b39c4eb825e "latex"
+  (generated)
+  "abst.pdf"
+["latex"] 1486302591 "abst.tex" "abst.dvi" "abst" 1486903534
+  "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
+  "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
+  "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
+  "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
+  "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmti10.tfm" 1136768653 1480 aa8e34af0eb6a2941b776984cf1dfdc4 ""
+  "/usr/local/texlive/2016/texmf-dist/tex/platex/base/jarticle.cls" 1480464068 24418 35137c1c10ed2e6ee48a3687fb25e682 ""
+  "/usr/local/texlive/2016/texmf-dist/tex/platex/base/jsize10.clo" 1480464068 8424 93bb2c25b6d5fa1f333bad04fa0582e9 ""
+  "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1480464068 31950 ac8b001dc981c955937bf505c6005d23 ""
+  "/usr/local/texlive/2016/texmf-var/web2c/eptex/platex.fmt" 1485551827 4059995 70e5d5b81cc3b4f087066ebdb44c8bb4 ""
+  "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
+  "AIabst.cls" 1479809220 3409 97781edc3c5a7f8f6cbd7e1c311c46b3 ""
+  "abst.aux" 1486302592 697 887feb50e5d9a38e2cd01346d15b7ff9 ""
+  "abst.tex" 1486402206 4771 ba84c160a11a8ff222a9759d802ba5e8 ""
+  "personal.sty" 1449553956 795 14c3d644cc1c5b9fc3fdee909a965ba4 ""
+  "personal.tex" 1486402206 2008 4420171d5739871d59a14876ab6982f8 ""
+  (generated)
+  "abst.dvi"
+  "abst.aux"
+  "abst.log"

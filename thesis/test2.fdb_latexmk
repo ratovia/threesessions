@@ -1,0 +1,16 @@
+# Fdb version 3
+["dvipdf"] 1487023642 "test2.dvi" "test2.pdf" "test2" 1487023642
+  "test2.dvi" 1487023641 868 4f238c93249d1634dde3e2444ded24f7 "latex"
+  (generated)
+  "test2.pdf"
+["latex"] 1487023641 "test2.tex" "test2.dvi" "test2" 1487023642
+  "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
+  "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
+  "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1480464068 31950 ac8b001dc981c955937bf505c6005d23 ""
+  "/usr/local/texlive/2016/texmf-var/web2c/eptex/platex.fmt" 1485551827 4059995 70e5d5b81cc3b4f087066ebdb44c8bb4 ""
+  "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
+  "test2.aux" 1487023641 8 a94a2480d3289e625eea47cd1b285758 ""
+  "test2.tex" 1487023641 3385 9f0c74a350d1e7228a975e54b32face1 ""
+  (generated)
+  "test2.log"
+  "test2.dvi"

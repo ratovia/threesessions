@@ -1,0 +1,16 @@
+# Fdb version 3
+["dvipdf"] 1486496344 "introduction.dvi" "introduction.pdf" "introduction" 1486496345
+  "introduction.dvi" 1486496344 928 84ca914a8d99af33bfc26fb8a97bdf03 "latex"
+  (generated)
+  "introduction.pdf"
+["latex"] 1486496344 "introduction.tex" "introduction.dvi" "introduction" 1486496345
+  "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
+  "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
+  "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1480464068 31950 ac8b001dc981c955937bf505c6005d23 ""
+  "/usr/local/texlive/2016/texmf-var/web2c/eptex/platex.fmt" 1485551827 4059995 70e5d5b81cc3b4f087066ebdb44c8bb4 ""
+  "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
+  "introduction.aux" 1486495325 680 dbeed5ce4ce1434e3df93e74bd923164 ""
+  "introduction.tex" 1486496343 3134 c5b8acb64d57fad16456ee776a9dd73a ""
+  (generated)
+  "introduction.log"
+  "introduction.dvi"

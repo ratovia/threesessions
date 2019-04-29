@@ -1,0 +1,15 @@
+# Fdb version 3
+["dvipdf"] 0 "abst.dvi" "abst.pdf" "abst" 0
+  "abst.dvi" 0 -1 0 "latex"
+  (generated)
+  "abst.pdf"
+["latex"] 1485589349 "thesis/abst.tex" "abst.dvi" "abst" 1485589349
+  "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1480464068 31950 ac8b001dc981c955937bf505c6005d23 ""
+  "/usr/local/texlive/2016/texmf-var/web2c/euptex/uplatex.fmt" 1485551874 4049825 25d37d4bff61b01675957c4c4502561f ""
+  "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
+  "AIabst.cls" 0 -1 0 ""
+  "abst.aux" 1485589349 8 a94a2480d3289e625eea47cd1b285758 ""
+  "thesis/abst.tex" 1485588784 4704 a97a3aa8beb07c2eff1782f359d31b2e ""
+  (generated)
+  "abst.log"
+  "abst.dvi"

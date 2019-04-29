@@ -1,0 +1,14 @@
+# Fdb version 3
+["dvipdf"] 1486899675 "reference.dvi" "reference.pdf" "reference" 1486899676
+  "reference.dvi" 1486899675 1292 1294be7a70b41e7e21b623419158853a "latex"
+  (generated)
+  "reference.pdf"
+["latex"] 1486899675 "reference.tex" "reference.dvi" "reference" 1486899676
+  "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1480464068 31950 ac8b001dc981c955937bf505c6005d23 ""
+  "/usr/local/texlive/2016/texmf-var/web2c/eptex/platex.fmt" 1485551827 4059995 70e5d5b81cc3b4f087066ebdb44c8bb4 ""
+  "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
+  "reference.aux" 1486899106 750 c62a3e5f5966f3bbf8e2b35d40fc8b48 ""
+  "reference.tex" 1486899674 1208 2d5c7e28ae132dde4877a2cad65be218 ""
+  (generated)
+  "reference.dvi"
+  "reference.log"

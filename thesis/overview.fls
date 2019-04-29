@@ -1,0 +1,7 @@
+PWD /Users/ratovia/threesessions/thesis
+INPUT /usr/local/texlive/2016/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf-var/web2c/eptex/platex.fmt
+INPUT overview.tex
+OUTPUT overview.log

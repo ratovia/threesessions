@@ -1,0 +1,14 @@
+# Fdb version 3
+["dvipdf"] 0 "thank.dvi" "thank.pdf" "thank" 0
+  "thank.dvi" 0 -1 0 "latex"
+  (generated)
+  "thank.pdf"
+["latex"] 1486298538 "thank.tex" "thank.dvi" "thank" 1486298538
+  "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1480464068 31950 ac8b001dc981c955937bf505c6005d23 ""
+  "/usr/local/texlive/2016/texmf-var/web2c/eptex/platex.fmt" 1485551827 4059995 70e5d5b81cc3b4f087066ebdb44c8bb4 ""
+  "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
+  "thank.aux" 1486298444 617 8d8db15f3562320ee21143c4e4d39007 ""
+  "thank.tex" 1486298515 509 b67c3017d74fac0a552b529d4c7b2a4a ""
+  (generated)
+  "thank.log"
+  "thank.dvi"

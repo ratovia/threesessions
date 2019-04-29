@@ -1,0 +1,191 @@
+PWD /Users/ratovia/threesessions/thesis
+INPUT /usr/local/texlive/2016/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf-var/web2c/eptex/platex.fmt
+INPUT thesis.tex
+OUTPUT thesis.log
+INPUT AIthesis.cls
+INPUT AIthesis.cls
+INPUT /usr/local/texlive/2016/texmf-dist/tex/platex/base/plext.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/platex/base/plext.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/platex/base/jreport.cls
+INPUT /usr/local/texlive/2016/texmf-dist/tex/platex/base/jreport.cls
+INPUT /usr/local/texlive/2016/texmf-dist/tex/platex/base/jsize11.clo
+INPUT /usr/local/texlive/2016/texmf-dist/tex/platex/base/jsize11.clo
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/min10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/trig.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics/trig.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics-def/dvipdfmx.def
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/graphics-def/dvipdfmx.def
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/tools/tabularx.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/tools/tabularx.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/url/url.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/url/url.sty
+INPUT thesis.aux
+INPUT thesis.aux
+INPUT introduction.aux
+INPUT introduction.aux
+INPUT background.aux
+INPUT background.aux
+INPUT method.aux
+INPUT method.aux
+INPUT test.aux
+INPUT test.aux
+INPUT conclusion.aux
+INPUT conclusion.aux
+INPUT thank.aux
+INPUT thank.aux
+INPUT reference.aux
+INPUT reference.aux
+OUTPUT thesis.aux
+INPUT personal.tex
+INPUT personal.tex
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/min10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/min10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/min10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+OUTPUT thesis.dvi
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/omxlcmex.fd
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/omxlcmex.fd
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/tgoth10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/goth10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT thesis.toc
+INPUT thesis.toc
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/tgoth10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/goth10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/min8.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/min6.tfm
+OUTPUT thesis.toc
+OUTPUT introduction.aux
+INPUT introduction.tex
+INPUT introduction.tex
+OUTPUT background.aux
+INPUT background.tex
+INPUT background.tex
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/tgoth10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/ptex-fonts/standard/goth10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT images/mujyun.png
+INPUT extractbb -O images/mujyun.png
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT images/ot.png
+INPUT extractbb -O images/ot.png
+INPUT images/threeway.png
+INPUT extractbb -O images/threeway.png
+INPUT images/Dual_shadow.png
+INPUT extractbb -O images/Dual_shadow.png
+INPUT images/DSCT.png
+INPUT extractbb -O images/DSCT.png
+INPUT images/comaya.png
+INPUT extractbb -O images/comaya.png
+OUTPUT method.aux
+INPUT method.tex
+INPUT method.tex
+INPUT images/er.png
+INPUT extractbb -O images/er.png
+INPUT images/prop.png
+INPUT extractbb -O images/prop.png
+INPUT images/uuid.png
+INPUT extractbb -O images/uuid.png
+INPUT images/DS.png
+INPUT extractbb -O images/DS.png
+INPUT images/sycle1.png
+INPUT extractbb -O images/sycle1.png
+INPUT images/sycle2.png
+INPUT extractbb -O images/sycle2.png
+INPUT images/sycle3.png
+INPUT extractbb -O images/sycle3.png
+INPUT images/ope0.png
+INPUT extractbb -O images/ope0.png
+INPUT images/ope1.png
+INPUT extractbb -O images/ope1.png
+INPUT images/ope2.png
+INPUT extractbb -O images/ope2.png
+INPUT images/ope3.png
+INPUT extractbb -O images/ope3.png
+INPUT images/ope4.png
+INPUT extractbb -O images/ope4.png
+INPUT images/ope5.png
+INPUT extractbb -O images/ope5.png
+OUTPUT test.aux
+INPUT test.tex
+INPUT test.tex
+INPUT images/init.png
+INPUT extractbb -O images/init.png
+INPUT images/kekka1.png
+INPUT extractbb -O images/kekka1.png
+INPUT images/kekka2.png
+INPUT extractbb -O images/kekka2.png
+INPUT images/kekka3.png
+INPUT extractbb -O images/kekka3.png
+INPUT test2.tex
+INPUT test2.tex
+INPUT images/jikken3.png
+INPUT extractbb -O images/jikken3.png
+INPUT images/jikken2.png
+INPUT extractbb -O images/jikken2.png
+OUTPUT conclusion.aux
+INPUT conclusion.tex
+INPUT conclusion.tex
+OUTPUT thank.aux
+INPUT thank.tex
+INPUT thank.tex
+OUTPUT reference.aux
+INPUT reference.tex
+INPUT reference.tex
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
+INPUT thesis.aux
+INPUT introduction.aux
+INPUT introduction.aux
+INPUT background.aux
+INPUT background.aux
+INPUT method.aux
+INPUT method.aux
+INPUT test.aux
+INPUT test.aux
+INPUT conclusion.aux
+INPUT conclusion.aux
+INPUT thank.aux
+INPUT thank.aux
+INPUT reference.aux
+INPUT reference.aux
