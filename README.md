@@ -3,6 +3,12 @@
 This is 3Dmodeling system's real-time colabolation software!
 but unfinished.....
 
+incomplete_demo
+
+https://drive.google.com/file/d/1T8vgblrcLycMkOXbO6YUf0CtE6BDoZIz/view?usp=sharing
+
+-------------
+
 Things you may want to cover:
 
 * Ruby version
